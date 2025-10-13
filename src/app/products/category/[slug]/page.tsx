@@ -5,16 +5,53 @@ import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+interface ProductItem {
+  image?: string;
+  codeNumber?: string;
+  codeName?: string | null;
+  shape?: string | null;
+  colorFamily?: string | null;
+  size?: string | null;
+  trimming?: string | null;
+  [key: string]: unknown;
+}
+
+interface ProductGroup {
+  shape?: string;
+  title?: string;
+  name?: string;
+  colorFamily?: string | null;
+  codes?: string[];
+  pageRanges?: [number, number][];
+  series?: string;
+  slug?: string;
+  dirName?: string;
+  images?: string[];
+  thumbnail?: string;
+  [key: string]: unknown;
+}
+
+interface CategorizedData {
+  groups?: {
+    sections?: ProductGroup[];
+    byShapeName?: ProductGroup[];
+    byShapeColor?: ProductGroup[];
+    [key: string]: unknown;
+  };
+  items?: ProductItem[];
+  [key: string]: unknown;
+}
+
 export default async function CategoryDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const dataPath = path.join(process.cwd(), "src", "data", "products.categorized.json");
-  let categorized: any = null;
+  let categorized: CategorizedData | null = null;
   let rawCategorized: string | null = null;
   try {
     rawCategorized = await fs.readFile(dataPath, "utf-8");
     categorized = JSON.parse(rawCategorized);
   } catch {}
-  let items: any[] = categorized?.items ?? [];
+  let items: ProductItem[] = categorized?.items ?? [];
   if ((!items || items.length === 0) && rawCategorized) {
     try {
       const startKey = '"items"';
@@ -51,11 +88,11 @@ export default async function CategoryDetail({ params }: { params: Promise<{ slu
       if (Array.isArray(parsedGen)) items = parsedGen;
     } catch {}
   }
-  const groupsColor: any[] = categorized?.groups?.byShapeColor ?? [];
-  const sections: any[] = categorized?.groups?.sections ?? [];
+  const groupsColor: ProductGroup[] = categorized?.groups?.byShapeColor ?? [];
+  const sections: ProductGroup[] = categorized?.groups?.sections ?? [];
 
   // Try to read external curated sections file if not present in categorized
-  let extraSections: any[] = [];
+  let extraSections: ProductGroup[] = [];
   if (!sections || sections.length === 0) {
     try {
       const sectionsPath = path.join(process.cwd(), "src", "data", "products.sections.json");
@@ -67,9 +104,9 @@ export default async function CategoryDetail({ params }: { params: Promise<{ slu
 
   const allSections = (sections && sections.length > 0) ? sections : extraSections;
 
-  const normalizeCode = (s: any): string => String(s ?? "").replace(/\s+/g, "").replace(/^LD/i, "").toUpperCase();
+  const normalizeCode = (s: string | null | undefined): string => String(s ?? "").replace(/\s+/g, "").replace(/^LD/i, "").toUpperCase();
   const addImage = (arr: string[], src?: string) => { if (src && !arr.includes(src)) arr.push(src); };
-  const itemsByNormCode = new Map<string, any>();
+  const itemsByNormCode = new Map<string, ProductItem>();
   for (const it of items) {
     if (it?.codeNumber) itemsByNormCode.set(normalizeCode(it.codeNumber), it);
   }
@@ -85,7 +122,7 @@ export default async function CategoryDetail({ params }: { params: Promise<{ slu
         .map((n) => `/images/product/${slug}/${n}`);
     } catch { return []; }
   };
-  const computeImages = async (grp: any): Promise<string[]> => {
+  const computeImages = async (grp: ProductGroup): Promise<string[]> => {
     const imgs: string[] = [];
     if (grp?.images && grp.images.length > 0) return grp.images;
     const byFolder = await readFolderImages(grp?.slug);
@@ -155,16 +192,16 @@ export default async function CategoryDetail({ params }: { params: Promise<{ slu
     return null;
   };
 
-  let group: any = null;
+  let group: ProductGroup | null = null;
   // Prefer curated section by slug
-  group = allSections.find((g: any) => g.slug === slug);
+  group = allSections.find((g: ProductGroup) => g.slug === slug) || null;
   if (group) {
     group = {
       ...group,
       images: await computeImages(group),
       shape: group.shape || "Collections",
-      colorFamily: group.colorFamily || undefined,
-      title: group.title || group.name || group.colorFamily,
+      colorFamily: group.colorFamily ?? undefined,
+      title: group.title || group.name || group.colorFamily || undefined,
     };
   } else {
     // Fallback to existing grouping
@@ -188,12 +225,12 @@ export default async function CategoryDetail({ params }: { params: Promise<{ slu
             </div>
             <h1 className="text-3xl font-bold text-white mb-2">{group.shape} — {group.title || group.colorFamily}</h1>
             <div className="text-gray-400 text-sm mb-6">
-              {group.codes?.length ? <span className="mr-3">Codes: {group.codes.join(", ")}</span> : null}
-              {group.pageRanges?.length ? <span className="mr-3">Pages: {group.pageRanges.map((r: any)=>`${r[0]}–${r[1]}`).join(", ")}</span> : null}
-              {group.names?.length ? <span>Names: {group.names.join(", ")}</span> : null}
+              {group.codes && group.codes.length > 0 ? <span className="mr-3">Codes: {group.codes.join(", ")}</span> : null}
+              {group.pageRanges && Array.isArray(group.pageRanges) && group.pageRanges.length > 0 ? <span className="mr-3">Pages: {group.pageRanges.map((r: [number, number]) => `${r[0]}–${r[1]}`).join(", ")}</span> : null}
+              {group.names && Array.isArray(group.names) && group.names.length > 0 ? <span>Names: {(group.names as string[]).join(", ")}</span> : null}
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {group.images.map((src: string, idx: number) => (
+              {(group.images || []).map((src: string, idx: number) => (
                 <div key={src + idx} className="overflow-hidden rounded-md border border-white/10">
                   <img src={src} alt={`${group.shape} ${group.colorFamily} ${idx + 1}`} className="w-full h-80 object-cover" />
                 </div>

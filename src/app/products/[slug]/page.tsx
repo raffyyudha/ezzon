@@ -5,6 +5,33 @@ import path from "path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+interface ProductItem {
+  codeNumber?: string;
+  codeName?: string | null;
+  shape?: string | null;
+  colorFamily?: string | null;
+  size?: string | null;
+  trimming?: string | null;
+  image?: string;
+  [key: string]: unknown;
+}
+
+interface CategorizedData {
+  items?: ProductItem[];
+  [key: string]: unknown;
+}
+
+interface ProductGroup {
+  shape: string;
+  codeNumber: string;
+  codeName: string | null;
+  colorFamily: string | null;
+  size: string | null;
+  trimming: string | null;
+  images: string[];
+  slug: string;
+}
+
 function slugify(shape: string, code: string) {
   const s = (shape || "Uncategorized").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
   const c = String(code || "").replace(/\s+/g, "").toLowerCase();
@@ -13,14 +40,14 @@ function slugify(shape: string, code: string) {
 
 export default async function ProductDetail({ params }: { params: { slug: string } }) {
   const dataPath = path.join(process.cwd(), "src", "data", "products.categorized.json");
-  let categorized: any = null;
+  let categorized: CategorizedData | null = null;
   try {
     const raw = await fs.readFile(dataPath, "utf-8");
     categorized = JSON.parse(raw);
   } catch {}
-  const items: any[] = categorized?.items ?? [];
+  const items: ProductItem[] = categorized?.items ?? [];
 
-  const groupMap = new Map<string, any>();
+  const groupMap = new Map<string, ProductGroup>();
   for (const it of items) {
     if (!it.codeNumber) continue;
     const shape = it.shape || "Uncategorized";
@@ -34,7 +61,7 @@ export default async function ProductDetail({ params }: { params: { slug: string
         colorFamily: it.colorFamily || null,
         size: it.size || null,
         trimming: it.trimming || null,
-        images: [] as string[],
+        images: [],
         slug: slugify(shape, it.codeNumber),
       };
       groupMap.set(key, g);
@@ -43,10 +70,10 @@ export default async function ProductDetail({ params }: { params: { slug: string
     if (!g.colorFamily && it.colorFamily) g.colorFamily = it.colorFamily;
     if (!g.size && it.size) g.size = it.size;
     if (!g.trimming && it.trimming) g.trimming = it.trimming;
-    if (!g.images.includes(it.image)) g.images.push(it.image);
+    if (it.image && !g.images.includes(it.image)) g.images.push(it.image);
   }
 
-  let group: any | null = null;
+  let group: ProductGroup | null = null;
   for (const g of groupMap.values()) {
     if (g.slug === params.slug) {
       group = g;

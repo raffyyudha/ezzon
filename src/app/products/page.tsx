@@ -6,19 +6,57 @@ import path from "path";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
 
+interface ProductItem {
+  image?: string;
+  codeNumber?: string;
+  codeName?: string | null;
+  shape?: string | null;
+  colorFamily?: string | null;
+  size?: string | null;
+  trimming?: string | null;
+  [key: string]: unknown;
+}
+
+interface ProductGroup {
+  shape?: string;
+  title?: string;
+  name?: string;
+  colorFamily?: string | null;
+  codes?: string[];
+  pageRanges?: [number, number][];
+  series?: string;
+  slug?: string;
+  dirName?: string;
+  images?: string[];
+  thumbnail?: string;
+  names?: string[];
+  [key: string]: unknown;
+}
+
+interface CategorizedData {
+  groups?: {
+    sections?: ProductGroup[];
+    byShapeName?: ProductGroup[];
+    byShapeColor?: ProductGroup[];
+    [key: string]: unknown;
+  };
+  items?: ProductItem[];
+  [key: string]: unknown;
+}
+
 export const dynamic = "force-dynamic";
 
 export default async function ProductsPage() {
   noStore();
   const dataPath = path.join(process.cwd(), "src", "data", "products.categorized.json");
-  let categorized: any = null;
+  let categorized: CategorizedData | null = null;
   let rawCategorized: string | null = null;
   try {
     rawCategorized = await fs.readFile(dataPath, "utf-8");
     categorized = JSON.parse(rawCategorized);
   } catch {}
   const groupSets = categorized?.groups ?? {};
-  let items: any[] = categorized?.items ?? [];
+  let items: ProductItem[] = categorized?.items ?? [];
   if ((!items || items.length === 0) && rawCategorized) {
     // Attempt to leniently extract items array from malformed JSON by bracket matching
     try {
@@ -58,9 +96,9 @@ export default async function ProductsPage() {
   }
 
   // Helper: normalize code for matching (strip spaces and LD prefix)
-  const normalizeCode = (s: any): string => String(s ?? "").replace(/\s+/g, "").replace(/^LD/i, "").toUpperCase();
+  const normalizeCode = (s: string | null | undefined): string => String(s ?? "").replace(/\s+/g, "").replace(/^LD/i, "").toUpperCase();
   const addImage = (arr: string[], src?: string) => { if (src && !arr.includes(src)) arr.push(src); };
-  const itemsByNormCode = new Map<string, any>();
+  const itemsByNormCode = new Map<string, ProductItem>();
   for (const it of items) {
     if (it?.codeNumber) itemsByNormCode.set(normalizeCode(it.codeNumber), it);
   }
@@ -126,12 +164,12 @@ export default async function ProductsPage() {
     }
     return top;
   };
-  const readFolderGroups = async (): Promise<any[]> => {
+  const readFolderGroups = async (): Promise<ProductGroup[]> => {
     const root = path.join(process.cwd(), "public", "images", "product");
     try {
       const entries = await fs.readdir(root, { withFileTypes: true });
       const dirs = entries.filter((e) => e.isDirectory());
-      const groups: any[] = [];
+      const groups: ProductGroup[] = [];
       for (const d of dirs) {
         const dirName = d.name;
         const images = await readFolderImages(undefined, dirName);
@@ -154,7 +192,7 @@ export default async function ProductsPage() {
     }
   };
   const unique = <T,>(arr: T[]) => Array.from(new Set(arr));
-  const computeCodes = (grp: any): string[] => {
+  const computeCodes = (grp: ProductGroup): string[] => {
     const out: string[] = [];
     // explicit
     if (grp?.codes && Array.isArray(grp.codes) && grp.codes.length > 0) return unique(grp.codes);
@@ -196,7 +234,7 @@ export default async function ProductsPage() {
     return unique(out);
   };
   // Helper to compute images for a group from items when missing
-  const computeImages = async (grp: any): Promise<string[]> => {
+  const computeImages = async (grp: ProductGroup): Promise<string[]> => {
     const imgs: string[] = [];
     // Priority 0: user-provided folder per section
     const byFolder = await readFolderImages(grp?.slug);
@@ -250,7 +288,7 @@ export default async function ProductsPage() {
   };
 
   // Prefer curated sections if available (internal or external)
-  let sections: any[] = Array.isArray(groupSets.sections) ? groupSets.sections : [];
+  let sections: ProductGroup[] = Array.isArray(groupSets.sections) ? groupSets.sections : [];
   if (!sections || sections.length === 0) {
     try {
       const sectionsPath = path.join(process.cwd(), "src", "data", "products.sections.json");
@@ -259,7 +297,7 @@ export default async function ProductsPage() {
       sections = Array.isArray(parsed?.sections) ? parsed.sections : [];
     } catch {}
   }
-  let groups: any[];
+  let groups: ProductGroup[];
   const hasSections = sections.length > 0;
   // Prefer folder-based categories if present
   const folderGroups = await readFolderGroups();
@@ -268,7 +306,7 @@ export default async function ProductsPage() {
     groups = folderGroups;
   } else if (hasSections) {
     // Enrich sections with computed images when not provided
-    const enriched = [] as any[];
+    const enriched: ProductGroup[] = [];
     for (const g of sections) {
       const codes = computeCodes(g);
       const images = (g.images && g.images.length > 0) ? g.images : await computeImages({ ...g, codes });
@@ -288,12 +326,12 @@ export default async function ProductsPage() {
       : (groupSets.byShapeColor ?? []);
   }
 
-  const byShape: Record<string, any[]> = {};
+  const byShape: Record<string, ProductGroup[]> = {};
   for (const g of groups) {
     const shape = g.shape || "Uncategorized";
     (byShape[shape] ||= []).push(g);
   }
-  const getName = (grp: any) => grp.name || grp.colorFamily || (grp.names?.[0] ?? "");
+  const getName = (grp: ProductGroup) => grp.name || grp.colorFamily || (grp.names?.[0] ?? "");
   if (!hasSections) {
     for (const s of Object.keys(byShape)) {
       byShape[s].sort((a, b) => String(getName(a)).localeCompare(String(getName(b))));
@@ -339,7 +377,7 @@ export default async function ProductsPage() {
               {hasFolders ? (
                 <div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {groups.map((grp: any) => {
+                    {groups.map((grp: ProductGroup) => {
                       const title = grp.title || "";
                       const isLightBlue = ["2803", "2804", "2805"].some(code => title.includes(code));
                       const cardClass = isLightBlue
@@ -362,13 +400,13 @@ export default async function ProductsPage() {
               ) : hasSections ? (
                 <div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {groups.map((grp: any) => (
+                    {groups.map((grp: ProductGroup) => (
                       <Link key={`${grp.slug}`} href={`/products/category/${grp.slug}`} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-md block hover:bg-white/15 transition">
                         <div className="mb-4 overflow-hidden rounded-md border border-white/10">
                           <img src={(grp.images && grp.images[0]) || "/images/service.jpg"} alt={`${grp.shape} ${getName(grp)}`} className="w-full h-48 object-cover" />
                         </div>
                         <h4 className="text-lg font-semibold mb-1 text-white">{grp.shape} — {getName(grp)}</h4>
-                        <p className="text-gray-200 mb-2">{grp.codes?.length ? `${grp.codes.length} code(s)` : (grp.pageRanges?.length ? `Pages ${grp.pageRanges.map((r: any)=>`${r[0]}–${r[1]}`).join(", ")}` : "")}</p>
+                        <p className="text-gray-200 mb-2">{grp.codes?.length ? `${grp.codes.length} code(s)` : (grp.pageRanges?.length ? `Pages ${grp.pageRanges.map((r: [number, number])=>`${r[0]}–${r[1]}`).join(", ")}` : "")}</p>
                         <div className="text-sm text-gray-300">
                           {grp.images && grp.images.length > 1 ? <span>· {grp.images.length} images</span> : null}
                         </div>
@@ -381,13 +419,13 @@ export default async function ProductsPage() {
                   <div key={shape}>
                     <h3 className="text-2xl font-bold text-white mb-6">{shape}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                      {(byShape[shape] || []).map((grp: any) => (
+                      {(byShape[shape] || []).map((grp: ProductGroup) => (
                         <Link key={`${grp.slug}`} href={`/products/category/${grp.slug}`} className="bg-white/10 backdrop-blur-sm p-8 rounded-lg shadow-md block hover:bg-white/15 transition">
                           <div className="mb-4 overflow-hidden rounded-md border border-white/10">
                             <img src={(grp.images && grp.images[0]) || "/images/service.jpg"} alt={`${grp.shape} ${getName(grp)}`} className="w-full h-48 object-cover" />
                           </div>
                           <h4 className="text-lg font-semibold mb-1 text-white">{grp.shape} — {getName(grp)}</h4>
-                          <p className="text-gray-200 mb-2">{grp.codes?.length ? `${grp.codes.length} code(s)` : (grp.pageRanges?.length ? `Pages ${grp.pageRanges.map((r: any)=>`${r[0]}–${r[1]}`).join(", ")}` : "")}</p>
+                          <p className="text-gray-200 mb-2">{grp.codes?.length ? `${grp.codes.length} code(s)` : (grp.pageRanges?.length ? `Pages ${grp.pageRanges.map((r: [number, number])=>`${r[0]}–${r[1]}`).join(", ")}` : "")}</p>
                           <div className="text-sm text-gray-300">
                             {grp.images && grp.images.length > 1 ? <span>· {grp.images.length} images</span> : null}
                           </div>
