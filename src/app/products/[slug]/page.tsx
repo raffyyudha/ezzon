@@ -76,7 +76,7 @@ export default async function ProductDetail({ params }: { params: Promise<{ slug
 
   let group: ProductGroup | null = null;
   for (const g of groupMap.values()) {
-    if (g.slug === params.slug) {
+    if (g.slug === slug) {
       group = g;
       break;
     }
