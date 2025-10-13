@@ -1,0 +1,76 @@
+{
+  "sections": [
+    {
+      "shape": "Stone",
+      "title": "SPC/Tile 300×600 (5/0.5mm) – Stone/Concrete LD 8253xx",
+      "slug": "stone-300x600-ld-8253xx",
+      "pageRanges": [[1,6],[7,9],[16,17]]
+    },
+    {
+      "shape": "Collections",
+      "title": "LD 280x Series – Wood/Grey",
+      "slug": "ld-280x-series-wood-grey",
+      "pageRanges": [[10,15],[18,25]]
+    },
+    {
+      "shape": "Plank",
+      "title": "SPC/Wood Plank – 8251xx Series",
+      "slug": "spc-wood-plank-8251xx",
+      "pageRanges": [[26,52]]
+    },
+    {
+      "shape": "Herringbone",
+      "title": "SPC Plank 150×900 (5/0.5mm) – 8255xx Series",
+      "slug": "spc-plank-150x900-8255xx",
+      "pageRanges": [[53,64]]
+    },
+    {
+      "shape": "Herringbone",
+      "title": "LVT Click 150×915 (5.0/0.5mm) – HRB 64xx Series",
+      "slug": "lvt-click-150x915-hrb-64xx",
+      "pageRanges": [[65,73]]
+    },
+    {
+      "shape": "Uncategorized",
+      "title": "Kode / Close-up – 63xx",
+      "slug": "codes-63xx",
+      "pageRanges": [[74,80]]
+    },
+    {
+      "shape": "Uncategorized",
+      "title": "Kode / Close-up – 56xx",
+      "slug": "codes-56xx",
+      "pageRanges": [[81,85]]
+    },
+    {
+      "shape": "Uncategorized",
+      "title": "Kode/Close-up Pelengkap – 55xx / 53xx / 52xx / 51xx / 82xxxx",
+      "slug": "codes-mixed-55xx-53xx-52xx-51xx-82xxxx",
+      "pageRanges": [[86,109]]
+    },
+    {
+      "shape": "Uncategorized",
+      "title": "Legend / Misc – Grafik / Template / Karakter Umum",
+      "slug": "legend-misc",
+      "pageRanges": [[110,121]]
+    },
+    {
+      "shape": "Herringbone",
+      "title": "LVT Chevron – 5mm Click System",
+      "slug": "lvt-chevron-5mm-click",
+      "pageRanges": [[122,127]]
+    },
+    {
+      "shape": "Collections",
+      "title": "LVT Large Format – 450×900×6mm",
+      "slug": "lvt-large-format-450x900x6mm",
+      "pageRanges": [[128,135]]
+    },
+    {
+      "shape": "Collections",
+      "title": "WPC Outdoor – Checking / Quality",
+      "slug": "wpc-outdoor-checking",
+      "pageRanges": [[136,144]]
+    }
+  ]
+}
