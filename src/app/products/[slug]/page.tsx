@@ -38,7 +38,8 @@ function slugify(shape: string, code: string) {
   return `${s}-${c}`;
 }
 
-export default async function ProductDetail({ params }: { params: { slug: string } }) {
+export default async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const dataPath = path.join(process.cwd(), "src", "data", "products.categorized.json");
   let categorized: CategorizedData | null = null;
   try {
