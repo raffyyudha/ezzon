@@ -138,8 +138,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-white mb-2">Email Us</h3>
-                      <a href="mailto:info@ezonrenovation.com" className="text-primary hover:text-primary/80 transition-colors text-lg font-medium">
-                        info@ezonrenovation.com
+                      <a href="mailto:ezonrenovation@yahoo.com" className="text-primary hover:text-primary/80 transition-colors text-lg font-medium">
+                        ezonrenovation@yahoo.com
                       </a>
                     </div>
                   </div>

@@ -39,7 +39,7 @@ export default function ChatBot() {
     - Located at No.1 Bukit Batok Crescent, Bukit Batok 658064, Singapore #06-45 (Wcega Plaza)
     - Phone: +65 6526 1797
     - WhatsApp: +65 9451 3098
-    - Email: info@ezonrenovation.com
+    - Email: ezonrenovation@yahoo.com
     
     Services:
     1. Shopping Mall Renovation - Comprehensive renovation services for shopping malls and large retail spaces
@@ -136,7 +136,7 @@ export default function ChatBot() {
       console.error('Error:', error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'Sorry, I\'m having trouble connecting right now. Please contact us directly at +65 6526 1797 or info@ezonrenovation.com for immediate assistance.',
+        text: 'Sorry, I\'m having trouble connecting right now. Please contact us directly at +65 6526 1797 or ezonrenovation@yahoo.com for immediate assistance.',
         isBot: true,
         timestamp: new Date()
       };
