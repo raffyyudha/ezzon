@@ -5,8 +5,9 @@ import Link from "next/link";
 import { getProduct } from "@/data/products";
 import { notFound } from "next/navigation";
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
-  const product = getProduct(params.slug);
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = getProduct(slug);
   if (!product) return notFound();
 
   return (
