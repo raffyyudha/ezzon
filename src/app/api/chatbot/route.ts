@@ -5,11 +5,21 @@ export const runtime = "nodejs";
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
+// Debug logging (hanya di development)
+if (process.env.NODE_ENV === 'development') {
+  console.log('OPENROUTER_API_KEY exists:', !!OPENROUTER_API_KEY);
+  console.log('OPENROUTER_API_KEY length:', OPENROUTER_API_KEY?.length || 0);
+}
+
 export async function POST(request: Request) {
   if (!OPENROUTER_API_KEY) {
+    console.error("OPENROUTER_API_KEY not found in environment variables");
     return NextResponse.json(
-      { message: "Server belum dikonfigurasi untuk OpenRouter." },
-      { status: 500 },
+      { 
+        reply: "Maaf, layanan AI sedang dalam pemeliharaan. Silakan hubungi kami melalui WhatsApp 08174147477 untuk bantuan langsung.",
+        error: "API key not configured"
+      },
+      { status: 200 }, // Return 200 so frontend doesn't show error
     );
   }
 
@@ -48,8 +58,11 @@ export async function POST(request: Request) {
       const text = await response.text();
       console.error("OpenRouter error", response.status, text);
       return NextResponse.json(
-        { message: "Gagal menghubungi layanan AI" },
-        { status: 500 },
+        { 
+          reply: "Maaf, layanan AI sedang sibuk. Silakan coba lagi dalam beberapa saat atau hubungi kami melalui WhatsApp 08174147477.",
+          error: `OpenRouter API error: ${response.status}`
+        },
+        { status: 200 }, // Return 200 so frontend doesn't show error
       );
     }
 
@@ -57,11 +70,17 @@ export async function POST(request: Request) {
     type OpenRouterResponse = { choices?: OpenRouterChoice[] };
 
     const json = (await response.json()) as OpenRouterResponse;
-    const reply: string = json?.choices?.[0]?.message?.content ?? "";
+    const reply: string = json?.choices?.[0]?.message?.content?.trim() ?? "";
 
-    return NextResponse.json({ reply });
+    // Fallback jika reply kosong
+    const finalReply = reply || "Maaf, saya tidak bisa memproses pertanyaan Anda saat ini. Silakan hubungi tim sales kami di WhatsApp 08174147477 untuk bantuan langsung.";
+
+    return NextResponse.json({ reply: finalReply });
   } catch (err) {
     console.error("Chatbot route error", err);
-    return NextResponse.json({ message: "Terjadi kesalahan di server" }, { status: 500 });
+    return NextResponse.json({ 
+      reply: "Maaf, terjadi kesalahan teknis. Untuk bantuan segera, silakan hubungi kami melalui WhatsApp 08174147477.",
+      error: "Server error"
+    }, { status: 200 });
   }
 }
