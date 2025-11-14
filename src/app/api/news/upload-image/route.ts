@@ -15,13 +15,11 @@ export async function POST(request: Request) {
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-
-    const originalName = (file as any).name || "news-image";
+    const originalName = "name" in file && typeof (file as File).name === "string" ? (file as File).name : "news-image";
     const extIndex = originalName.lastIndexOf(".");
     const ext = extIndex !== -1 ? originalName.slice(extIndex) : "";
     const filePath = `news/${Date.now()}-${Math.random().toString(36).slice(2, 8)}${ext}`;
-
-    const contentType = (file as any).type || "image/jpeg";
+    const contentType = "type" in file && typeof (file as Blob).type === "string" ? (file as Blob).type : "image/jpeg";
 
     const { error } = await supabase.storage.from("news-images").upload(filePath, buffer, {
       contentType,
@@ -36,7 +34,7 @@ export async function POST(request: Request) {
     const { data } = supabase.storage.from("news-images").getPublicUrl(filePath);
 
     return NextResponse.json({ url: data.publicUrl }, { status: 201 });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("Failed to upload news image", err);
     return NextResponse.json({ message: "Gagal mengupload gambar" }, { status: 500 });
   }

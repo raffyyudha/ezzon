@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const slides = [
   {
@@ -81,12 +82,12 @@ export default function HeroSection() {
       </div>
     </section>
     <div className="container mt-4 md:mt-6 flex justify-center">
-      <a
+      <Link
         href="/products"
         className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-semibold shadow-lg text-sm"
       >
         Lihat Produk
-      </a>
+      </Link>
     </div>
     </>
   );

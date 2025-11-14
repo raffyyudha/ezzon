@@ -17,6 +17,15 @@ export type NewsInput = {
   imageUrl?: string;
 };
 
+type NewsRow = {
+  id: string;
+  title: string;
+  summary: string;
+  date: string;
+  url: string | null;
+  image_url: string | null;
+};
+
 export async function getAllNews(): Promise<NewsItem[]> {
   const { data, error } = await supabase
     .from("news")
@@ -28,7 +37,7 @@ export async function getAllNews(): Promise<NewsItem[]> {
     throw new Error("Gagal memuat data berita");
   }
 
-  return (data ?? []).map((row: any) => ({
+  return ((data as NewsRow[] | null) ?? []).map((row) => ({
     id: row.id,
     title: row.title,
     summary: row.summary,

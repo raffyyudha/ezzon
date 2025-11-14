@@ -1,27 +1,45 @@
 import { NextResponse } from "next/server";
 import { deleteNews, getNewsById, updateNews, type NewsInput } from "@/lib/newsStore";
 
-export async function GET(
-  _request: Request,
-  context: any
-) {
+function getIdFromRequest(request: Request): string | null {
   try {
-    const item = await getNewsById(context.params.id);
+    const url = new URL(request.url);
+    const segments = url.pathname.split("/").filter(Boolean);
+    return segments[segments.length - 1] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export async function GET(request: Request) {
+  const id = getIdFromRequest(request);
+  if (!id) {
+    return NextResponse.json({ message: "ID berita tidak valid" }, { status: 400 });
+  }
+
+  try {
+    const item = await getNewsById(id);
     if (!item) {
       return NextResponse.json({ message: "Berita tidak ditemukan" }, { status: 404 });
     }
     return NextResponse.json(item);
-  } catch (err) {
+  } catch (err: unknown) {
     console.error("Failed to load news item", err);
-    return NextResponse.json({ message: "Failed to load news" }, { status: 500 });
+    const message = err instanceof Error ? err.message : "Failed to load news";
+    return NextResponse.json({ message }, { status: 500 });
   }
 }
 
-export async function PUT(request: Request, context: any) {
+export async function PUT(request: Request) {
+  const id = getIdFromRequest(request);
+  if (!id) {
+    return NextResponse.json({ message: "ID berita tidak valid" }, { status: 400 });
+  }
+
   try {
     const body = (await request.json()) as NewsInput;
 
-    const item = await updateNews(context.params.id, {
+    const item = await updateNews(id, {
       title: body.title?.trim(),
       summary: body.summary?.trim(),
       date: body.date,
@@ -30,27 +48,25 @@ export async function PUT(request: Request, context: any) {
     });
 
     return NextResponse.json(item);
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Failed to update news", err);
-    return NextResponse.json(
-      { message: err?.message || "Failed to update news" },
-      { status: 400 },
-    );
+    const message = err instanceof Error ? err.message : "Failed to update news";
+    return NextResponse.json({ message }, { status: 400 });
   }
 }
 
-export async function DELETE(
-  _request: Request,
-  context: any
-) {
+export async function DELETE(request: Request) {
+  const id = getIdFromRequest(request);
+  if (!id) {
+    return NextResponse.json({ message: "ID berita tidak valid" }, { status: 400 });
+  }
+
   try {
-    await deleteNews(context.params.id);
+    await deleteNews(id);
     return NextResponse.json({ success: true });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Failed to delete news", err);
-    return NextResponse.json(
-      { message: err?.message || "Failed to delete news" },
-      { status: 400 },
-    );
+    const message = err instanceof Error ? err.message : "Failed to delete news";
+    return NextResponse.json({ message }, { status: 400 });
   }
 }

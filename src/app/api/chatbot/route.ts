@@ -53,7 +53,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const json = (await response.json()) as any;
+    type OpenRouterChoice = { message?: { content?: string } };
+    type OpenRouterResponse = { choices?: OpenRouterChoice[] };
+
+    const json = (await response.json()) as OpenRouterResponse;
     const reply: string = json?.choices?.[0]?.message?.content ?? "";
 
     return NextResponse.json({ reply });

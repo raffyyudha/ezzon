@@ -43,8 +43,9 @@ export default function AdminNewsPage() {
         if (!res.ok) throw new Error("Gagal memuat data berita");
         const data = (await res.json()) as NewsItem[];
         setItems(data);
-      } catch (err: any) {
-        setError(err?.message || "Terjadi kesalahan");
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Terjadi kesalahan";
+        setError(message);
       } finally {
         setLoading(false);
       }
@@ -88,14 +89,19 @@ export default function AdminNewsPage() {
       const res = await fetch(`/api/news/${id}`, { method: "DELETE" });
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(body?.message || "Gagal menghapus berita");
+        const message =
+          typeof body === "object" && body && "message" in body && typeof (body as any).message === "string"
+            ? (body as any).message
+            : "Gagal menghapus berita";
+        throw new Error(message);
       }
       setItems((prev) => prev.filter((it) => it.id !== id));
       if (editingId === id) {
         handleCancelEdit();
       }
-    } catch (err: any) {
-      setError(err?.message || "Gagal menghapus berita");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Gagal menghapus berita";
+      setError(message);
     }
   };
 
@@ -143,7 +149,11 @@ export default function AdminNewsPage() {
 
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error(body?.message || "Gagal menyimpan berita");
+        const message =
+          typeof body === "object" && body && "message" in body && typeof (body as any).message === "string"
+            ? (body as any).message
+            : "Gagal menyimpan berita";
+        throw new Error(message);
       }
 
       const saved = (await res.json()) as NewsItem;
@@ -161,8 +171,9 @@ export default function AdminNewsPage() {
       setImageUrl("");
       setImageFile(null);
       setEditingId(null);
-    } catch (err: any) {
-      setError(err?.message || "Gagal menyimpan berita");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Gagal menyimpan berita";
+      setError(message);
     } finally {
       setSubmitting(false);
     }
