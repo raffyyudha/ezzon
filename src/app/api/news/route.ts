@@ -24,11 +24,9 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json(item, { status: 201 });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Failed to add news", err);
-    return NextResponse.json(
-      { message: err?.message || "Failed to add news" },
-      { status: 400 },
-    );
+    const message = err instanceof Error ? err.message : "Failed to add news";
+    return NextResponse.json({ message }, { status: 400 });
   }
 }

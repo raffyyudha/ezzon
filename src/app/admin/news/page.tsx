@@ -90,8 +90,8 @@ export default function AdminNewsPage() {
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
         const message =
-          typeof body === "object" && body && "message" in body && typeof (body as any).message === "string"
-            ? (body as any).message
+          typeof body === "object" && body && "message" in body && typeof body.message === "string"
+            ? body.message
             : "Gagal menghapus berita";
         throw new Error(message);
       }
@@ -150,8 +150,8 @@ export default function AdminNewsPage() {
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
         const message =
-          typeof body === "object" && body && "message" in body && typeof (body as any).message === "string"
-            ? (body as any).message
+          typeof body === "object" && body && "message" in body && typeof body.message === "string"
+            ? body.message
             : "Gagal menyimpan berita";
         throw new Error(message);
       }
