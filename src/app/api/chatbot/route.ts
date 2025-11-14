@@ -39,55 +39,31 @@ export async function POST(request: Request) {
       ...history,
     ];
 
-    // Try multiple models for better reliability
-    const models = [
-      "meta-llama/llama-3.1-8b-instruct:free",
-      "microsoft/wizardlm-2-8x22b:free", 
-      "google/gemma-2-9b-it:free"
-    ];
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL || "",
+        "X-Title": "Baswara Website Chatbot",
+      },
+      body: JSON.stringify({
+        model: "deepseek/deepseek-chat",
+        messages,
+        temperature: 0.4,
+      }),
+    });
 
-    let response;
-    let lastError;
-
-    for (const model of models) {
-      try {
-        response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-            "HTTP-Referer": process.env.NEXT_PUBLIC_SITE_URL || "",
-            "X-Title": "Baswara Website Chatbot",
-          },
-          body: JSON.stringify({
-            model,
-            messages,
-            temperature: 0.7,
-            max_tokens: 500,
-          }),
-        });
-
-        if (response.ok) {
-          console.log(`Successfully used model: ${model}`);
-          break;
-        } else {
-          lastError = await response.text();
-          console.warn(`Model ${model} failed:`, response.status, lastError);
-        }
-      } catch (err) {
-        console.warn(`Model ${model} error:`, err);
-        lastError = err;
-      }
-    }
-
-    if (!response || !response.ok) {
-      console.error("All OpenRouter models failed, last error:", lastError);
+    if (!response.ok) {
+      const text = await response.text().catch(() => "");
+      console.error("OpenRouter DeepSeek error", response.status, text);
       return NextResponse.json(
-        { 
-          reply: "Maaf, layanan AI sedang sibuk. Silakan coba lagi dalam beberapa saat atau hubungi kami melalui WhatsApp 08174147477.",
-          error: "All models failed"
+        {
+          reply:
+            "Maaf, layanan AI sedang sibuk. Silakan coba lagi dalam beberapa saat atau hubungi kami melalui WhatsApp 08174147477.",
+          error: `OpenRouter DeepSeek error: ${response.status}`,
         },
-        { status: 200 }, // Return 200 so frontend doesn't show error
+        { status: 200 },
       );
     }
 
