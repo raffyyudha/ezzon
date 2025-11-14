@@ -21,9 +21,10 @@ function formatDate(value: string | null | undefined) {
 export default async function NewsDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const news = await getNewsById(params.id);
+  const { id } = await params;
+  const news = await getNewsById(id);
 
   if (!news) {
     return (
