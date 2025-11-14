@@ -3,7 +3,7 @@ import { deleteNews, getNewsById, updateNews, type NewsInput } from "@/lib/newsS
 
 export async function GET(
   _request: Request,
-  context: { params: { id: string } },
+  context: any
 ) {
   try {
     const item = await getNewsById(context.params.id);
@@ -17,7 +17,7 @@ export async function GET(
   }
 }
 
-export async function PUT(request: Request, context: { params: { id: string } }) {
+export async function PUT(request: Request, context: any) {
   try {
     const body = (await request.json()) as NewsInput;
 
@@ -41,7 +41,7 @@ export async function PUT(request: Request, context: { params: { id: string } })
 
 export async function DELETE(
   _request: Request,
-  context: { params: { id: string } },
+  context: any
 ) {
   try {
     await deleteNews(context.params.id);
