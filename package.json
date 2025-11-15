@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "bunx tsc --noEmit && next lint",
-    "format": "bunx biome format --write",
     "compress-images": "node scripts/compress-images.js"
   },
   "dependencies": {
@@ -23,7 +22,6 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.4",
     "@eslint/eslintrc": "^3.3.1",
     "@types/node": "^20.17.50",
     "@types/react": "^18.3.22",
@@ -31,12 +29,7 @@
     "eslint": "^9.27.0",
     "eslint-config-next": "15.1.7",
     "glob": "^11.0.3",
-    "imagemin": "^9.0.1",
-    "imagemin-mozjpeg": "^10.0.0",
-    "imagemin-pngquant": "^10.0.0",
-    "imagemin-webp": "^8.0.0",
     "postcss": "^8.5.3",
-    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3"
   }
