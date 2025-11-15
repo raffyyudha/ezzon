@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const OPENROUTER_MODEL_ID = process.env.OPENROUTER_MODEL_ID ?? "openai/gpt-4o";
 
 // Debug logging (hanya di development)
 if (process.env.NODE_ENV === 'development') {
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
         "X-Title": "Baswara Website Chatbot",
       },
       body: JSON.stringify({
-        model: "gpt-4.0",
+        model: OPENROUTER_MODEL_ID,
         messages,
         temperature: 0.4,
       }),
