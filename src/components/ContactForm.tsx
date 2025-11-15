@@ -93,7 +93,6 @@ export default function ContactForm() {
             <option value="">Pilih produk</option>
             <option value="expertpower">SATEC ExpertPower (EMS)</option>
             <option value="sertec">SERTEC Solutions</option>
-            <option value="senter-ptz">Kamera PTZ SENTER</option>
             <option value="other">Lainnya</option>
           </select>
         </div>

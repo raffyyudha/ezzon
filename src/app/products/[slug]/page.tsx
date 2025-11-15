@@ -102,14 +102,6 @@ function getLongDescription(product: Product): string[] {
     ];
   }
 
-  if (product.brand === "SENTER") {
-    return [
-      `${product.name} adalah kamera PTZ cerdas dari SENTER yang dirancang khusus untuk inspeksi jaringan listrik dan infrastruktur luar ruang. Kombinasi optik berkualitas tinggi dan kemampuan pan/tilt/zoom memungkinkan operator melihat detail komponen dari jarak jauh dengan sangat jelas.`,
-      "Dengan dukungan fitur seperti night vision, konektivitas nirkabel, dan analitik berbasis AI pada model tertentu, sistem ini mampu mendeteksi anomali lebih dini sehingga inspeksi lapangan dapat dilakukan secara lebih terarah dan efisien.",
-      "{name} cocok dipasang pada jalur transmisi, gardu, area utilitas, maupun lokasi kritis lain yang membutuhkan pemantauan 24/7 tanpa harus selalu mengirim tim ke lapangan.".replace("{name}", product.name),
-    ];
-  }
-
   // Fallback
   return [product.description];
 }

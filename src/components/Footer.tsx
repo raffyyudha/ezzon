@@ -55,7 +55,7 @@ export default async function Footer() {
               </p>
               
               <p>
-                Kami juga menyediakan SERTEC Sistem Pencegahan Petir untuk perlindungan infrastruktur kritis serta SENTER AI PTZ Thermal Transmission Camera untuk pengawasan keamanan 24/7 berbasis kecerdasan buatan.
+                Kami juga menyediakan SERTEC Sistem Pencegahan Petir untuk perlindungan infrastruktur kritis serta solusi monitoring dan keamanan berbasis teknologi tinggi.
               </p>
               
               <p>

@@ -11,9 +11,9 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "Energy Management Systems (EMS) - SATEC ExpertPower, SERTEC, SENTER",
+  title: "Energy Management Systems (EMS) - SATEC ExpertPower & SERTEC",
   description:
-    "Solusi Manajemen Energi (EMS) berbahasa Indonesia dengan penekanan pada SATEC ExpertPower sebagai produk utama, didukung perangkat SERTEC dan kamera PTZ SENTER. Integrasi WhatsApp dan AI Chatbot.",
+    "Solusi Manajemen Energi (EMS) berbahasa Indonesia dengan penekanan pada SATEC ExpertPower sebagai produk utama, didukung perangkat SERTEC untuk monitoring dan proteksi. Integrasi WhatsApp dan AI Chatbot.",
 };
 
 export default function RootLayout({

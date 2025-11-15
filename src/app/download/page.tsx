@@ -4,8 +4,12 @@ import { getBrochureGroups } from "@/lib/brochures";
 
 export default function DownloadPage() {
   const allGroups = getBrochureGroups();
-  // Sembunyikan group "Lainnya" seperti permintaan
-  const groups = allGroups.filter((g) => g.brand !== "Lainnya");
+  // Sembunyikan group "Lainnya" dan brosur Senter seperti permintaan
+  const groups = allGroups.filter(
+    (g) =>
+      g.brand !== "Lainnya" &&
+      !g.brand.toLowerCase().includes("senter"),
+  );
 
   return (
     <div className="min-h-screen bg-white">

@@ -33,7 +33,7 @@ const slides = [
     id: 3,
     imageMobile: android3.src,
     imageDesktop: desktop3.src,
-    title: "Integrasi SERTEC & Kamera PTZ SENTER",
+    title: "Integrasi SERTEC",
     subtitle:
       "Perangkat pendukung untuk monitoring, proteksi, dan inspeksi jaringan",
   },

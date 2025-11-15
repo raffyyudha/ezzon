@@ -5,7 +5,7 @@ import Link from "next/link";
 import { products } from "@/data/products";
 
 export default function ProductsIndex() {
-  // Custom sections order: SATEC hardware → ExpertPower (EMS) → SERTEC Marine → SENTER
+  // Custom sections order: SATEC hardware → ExpertPower (EMS) → SERTEC Marine
   const sections = [
     {
       title: "SATEC",
@@ -18,10 +18,6 @@ export default function ProductsIndex() {
     {
       title: "SERTEC",
       items: products.filter((p) => p.brand === "SERTEC Marine"),
-    },
-    {
-      title: "SENTER",
-      items: products.filter((p) => p.brand === "SENTER"),
     },
   ];
 

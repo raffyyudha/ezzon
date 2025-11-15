@@ -1,7 +1,7 @@
 export type Product = {
   slug: string;
   name: string;
-  brand: "SATEC" | "SERTEC" | "SERTEC Marine" | "SENTER" | "EMS";
+  brand: "SATEC" | "SERTEC" | "SERTEC Marine" | "EMS";
   category: string;
   description: string;
   features: string[];
@@ -456,46 +456,6 @@ export const products: Product[] = [
     image: "/products/sertec/cmce-marine-diamond.png",
     externalUrl: "https://marine.sertec.com.py/wp-content/uploads/2025/03/BROCHURE-Marine-ENG-2024.pdf",
   },
-  {
-    slug: "ai-power-inspection",
-    name: "AI Power Inspection Monitor",
-    brand: "SENTER",
-    category: "PTZ Cameras",
-    description: "Kamera PTZ untuk inspeksi saluran transmisi daya dengan AI dan lensa zoom 1600W.",
-    features: ["AI detection", "1600W lens", "Night vision", "Pan/Tilt"],
-    image: "/products/senter/ai-power-inspection.png",
-    externalUrl: "https://id.senter-e.org/power-transmission-line-inspection-system/ptz-power-transimission-line-monitor/3g-4g-micro-ptz-power-transmission-ai-anti.html",
-  },
-  {
-    slug: "st2303b-solar-ptz",
-    name: "ST2303B Solar-Powered PTZ Monitoring Camera",
-    brand: "SENTER",
-    category: "PTZ Cameras",
-    description: "Sistem monitor jaringan listrik dengan kamera PTZ bertenaga surya nirkabel.",
-    features: ["Solar powered", "Wireless", "Pan/Tilt", "Omnidirectional"],
-    image: "/products/senter/st2303b-solar-ptz.png",
-    externalUrl: "https://id.senter-e.org/power-transmission-line-inspection-system/ptz-power-transimission-line-monitor/solar-powered-ptz-monitoring-camera.html",
-  },
-  {
-    slug: "ptz-outdoor-inspection",
-    name: "PTZ Outdoor Power Inspection Camera",
-    brand: "SENTER",
-    category: "PTZ Cameras",
-    description: "Kamera inspeksi daya PTZ outdoor dengan kepala omnidirectional dan lensa zoom.",
-    features: ["Outdoor rated", "Omnidirectional head", "Zoom lens", "Optional modules"],
-    image: "/products/senter/ptz-outdoor-inspection.jpg",
-    externalUrl: "https://id.senter-e.org/power-transmission-line-inspection-system/ptz-power-transimission-line-monitor/ptz-outdoor-surveillance-cameras.html",
-  },
-  {
-    slug: "ai-anti-intrusion",
-    name: "AI Anti-Intrusion Transmission Line Camera",
-    brand: "SENTER",
-    category: "PTZ Cameras",
-    description: "Kamera AI anti-intrusi untuk inspeksi saluran transmisi dengan deteksi cerdas.",
-    features: ["AI anti-intrusion", "Solar powered", "Night vision", "GPS/Beidou"],
-    image: "/products/senter/ai-anti-intrusion.jpg",
-    externalUrl: "https://id.senter-e.org/power-transmission-line-inspection-system/ptz-power-transimission-line-monitor/solar-security-camera.html",
-  },
 ];
 
 export function getProduct(slug: string) {
@@ -505,7 +465,6 @@ export function getProduct(slug: string) {
 export const brands: Array<Product["brand"]> = [
   "SATEC",
   "SERTEC Marine",
-  "SENTER",
 ];
 
 

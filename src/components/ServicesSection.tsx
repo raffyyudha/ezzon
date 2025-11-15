@@ -26,14 +26,6 @@ const services = [
     link: "/products#sertec",
     bg: "/bgsemua.png",
   },
-  {
-    id: 4,
-    title: "Kamera PTZ SENTER",
-    description: "AI Thermal Kamera Transmisi",
-    image: "/products/senter/ai-power-inspection.png",
-    link: "/products#senter",
-    bg: "/bgsemua.png",
-  },
 ];
 
 export default function ServicesSection() {
@@ -97,8 +89,7 @@ export default function ServicesSection() {
                   className="absolute inset-0 bg-cover bg-center"
                   style={{
                     backgroundImage: `url(${service.image})`,
-                    backgroundPosition:
-                      service.title === "Kamera PTZ SENTER" ? "60% 40%" : "center",
+                    backgroundPosition: "center",
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />

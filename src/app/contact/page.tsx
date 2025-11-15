@@ -184,7 +184,7 @@ export default async function ContactPage() {
                   </svg>
                 </div>
                 <h3 className="font-semibold mb-2 text-white">Integrasi Perangkat</h3>
-                <p className="text-gray-100 text-sm">Terintegrasi secara mulus dengan sistem kamera PTZ SERTEC dan SENTER.</p>
+                <p className="text-gray-100 text-sm">Terintegrasi secara mulus dengan sistem kamera PTZ SERTEC dan solusi pendukung lainnya.</p>
               </div>
 
               <div className="text-center">

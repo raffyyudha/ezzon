@@ -101,7 +101,7 @@ export default function AboutPage() {
               </p>
 
               <p className="text-base text-gray-700 leading-relaxed mb-6">
-                Kami adalah mitra solusi dari <strong className="text-[#FC0002]">Perusahaan Multinasional</strong> (SATEC, SERTEC, SENTER) untuk <strong>Inspeksi, Analisis, Kualitas Daya dan Solusi Billing, Rental Energi</strong> dan <strong>Solusi Proteksi Petir</strong>.
+                Kami adalah mitra solusi dari <strong className="text-[#FC0002]">Perusahaan Multinasional</strong> (SATEC, SERTEC) untuk <strong>Inspeksi, Analisis, Kualitas Daya dan Solusi Billing, Rental Energi</strong> dan <strong>Solusi Proteksi Petir</strong>.
               </p>
 
               {/* Download Profile Button */}
