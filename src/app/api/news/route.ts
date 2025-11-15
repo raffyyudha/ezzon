@@ -18,6 +18,7 @@ export async function POST(request: Request) {
     const item = await addNews({
       title: body.title?.trim(),
       summary: body.summary?.trim(),
+      content: body.content?.trim() || undefined,
       date: body.date,
       url: body.url?.trim() || undefined,
       imageUrl: body.imageUrl?.trim() || undefined,

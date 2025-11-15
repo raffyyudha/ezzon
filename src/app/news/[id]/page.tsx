@@ -98,18 +98,28 @@ export default async function NewsDetailPage({
                 <img
                   src={news.imageUrl}
                   alt={news.title}
+                  loading="lazy"
                   className="w-full h-64 md:h-80 object-cover"
                 />
               </div>
             )}
 
-            <article className="prose max-w-none text-gray-800">
-              {paragraphs.length === 0 ? (
-                <p>{news.summary}</p>
-              ) : (
-                paragraphs.map((p, idx) => <p key={idx}>{p}</p>)
-              )}
-            </article>
+            {news.content && news.content.trim() !== "" ? (
+              // Render full article with HTML content
+              <article
+                className="prose prose-lg max-w-none text-gray-800 prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-img:shadow-md prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic"
+                dangerouslySetInnerHTML={{ __html: news.content }}
+              />
+            ) : (
+              // Fallback to summary if no content
+              <article className="prose max-w-none text-gray-800">
+                {paragraphs.length === 0 ? (
+                  <p>{news.summary}</p>
+                ) : (
+                  paragraphs.map((p, idx) => <p key={idx}>{p}</p>)
+                )}
+              </article>
+            )}
           </div>
         </section>
       </main>

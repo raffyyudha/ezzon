@@ -48,7 +48,7 @@ export async function POST(request: Request) {
         "X-Title": "Baswara Website Chatbot",
       },
       body: JSON.stringify({
-        model: "deepseek/deepseek-chat",
+        model: "gpt-4.0",
         messages,
         temperature: 0.4,
       }),
@@ -71,10 +71,15 @@ export async function POST(request: Request) {
     type OpenRouterResponse = { choices?: OpenRouterChoice[] };
 
     const json = (await response.json()) as OpenRouterResponse;
-    const reply: string = json?.choices?.[0]?.message?.content?.trim() ?? "";
+    const rawReply: string = json?.choices?.[0]?.message?.content?.trim() ?? "";
 
     // Fallback jika reply kosong
-    const finalReply = reply || "Maaf, saya tidak bisa memproses pertanyaan Anda saat ini. Silakan hubungi tim sales kami di WhatsApp 08174147477 untuk bantuan langsung.";
+    const baseReply =
+      rawReply ||
+      "Maaf, saya tidak bisa memproses pertanyaan Anda saat ini. Silakan hubungi tim sales kami di WhatsApp 08174147477 untuk bantuan langsung.";
+
+    // Hapus semua tanda kutip ganda dari jawaban agar lebih mudah dibaca klien
+    const finalReply = baseReply.replace(/"/g, "");
 
     return NextResponse.json({ reply: finalReply });
   } catch (err) {

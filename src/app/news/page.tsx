@@ -35,34 +35,20 @@ export default async function NewsPage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative py-16">
+        <section className="relative py-12 sm:py-16 md:py-20 overflow-hidden">
+          {/* Mobile background */}
           <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/hero-berita-event.png')" }}
+            className="absolute inset-0 bg-cover bg-center md:hidden"
+            style={{ backgroundImage: "url('/news-mobile.png')" }}
           />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="container">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="flex items-center justify-center mb-4">
-                <svg
-                  className="w-10 h-10 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h1 className="text-4xl font-bold text-white mb-2">Berita &amp; Event</h1>
-              <p className="text-white/80 max-w-2xl mx-auto">
-                Kumpulan berita dan event resmi PT. Anugerah Baswara Megah.
-              </p>
-            </div>
+          {/* Desktop background */}
+          <div
+            className="absolute inset-0 bg-cover bg-center hidden md:block"
+            style={{ backgroundImage: "url('/news-desktop.png')" }}
+          />
+          <div className="container relative flex items-center justify-center">
+            {/* Spacer untuk tinggi hero */}
+            <div className="h-40 sm:h-56 md:h-80 lg:h-96" />
           </div>
         </section>
 

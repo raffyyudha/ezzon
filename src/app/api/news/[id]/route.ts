@@ -42,6 +42,7 @@ export async function PUT(request: Request) {
     const item = await updateNews(id, {
       title: body.title?.trim(),
       summary: body.summary?.trim(),
+      content: body.content?.trim() || undefined,
       date: body.date,
       url: body.url?.trim() || undefined,
       imageUrl: body.imageUrl?.trim() || undefined,

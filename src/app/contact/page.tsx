@@ -1,31 +1,8 @@
-"use client";
-
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { useState } from "react";
+import ContactForm from "@/components/ContactForm";
 
-export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    message: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Terima kasih! Kami akan menghubungi Anda segera.');
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+export default async function ContactPage() {
 
   return (
     <div className="min-h-screen">
@@ -33,32 +10,31 @@ export default function ContactPage() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative py-24">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/hero-contact.png')" }}
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="container relative">
-            <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-5xl font-bold text-white mb-6">
-                Kontak
-              </h1>
-              <p className="text-xl text-white/80 leading-relaxed">
-                Hubungi tim kami untuk konsultasi dan penawaran solusi Energy Management Systems (EMS).
-              </p>
-            </div>
+        <section className="bg-black py-10 sm:py-12 md:py-14">
+          <div className="container flex items-center justify-center">
+            <img
+              src="/kontakk.png"
+              alt="Hubungi Kami"
+              loading="lazy"
+              className="w-full max-w-4xl h-auto object-contain"
+            />
           </div>
         </section>
 
         {/* Contact Information & Form */}
-        <section className="py-20">
-          <div className="container">
+        <section
+          className="relative py-20 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/contact us 2.jpg')",
+          }}
+        >
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="container relative">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
               {/* Contact Information */}
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                  Hubungi Kami
+                <h2 className="text-3xl font-bold text-white mb-8">
+                  Informasi Kontak
                 </h2>
 
                 <div className="space-y-8">
@@ -70,14 +46,16 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Kunjungi Kantor Kami</h3>
-                      <p className="text-gray-600 leading-relaxed">
+                      <h3 className="font-semibold text-white mb-2">Kunjungi Kantor Kami</h3>
+                      <p className="text-gray-100 leading-relaxed">
                         <strong>Kantor Pusat</strong><br />
-                        Paccerakang Raya No. 150A, Biringkanaya - Makassar 90241
+                        Paccerakang Raya No. 150A, Biringkanaya<br />
+                        Makassar 90241, Sulawesi Selatan
                         <br />
                         <br />
                         <strong>Kantor Cabang</strong><br />
-                        Jl. Gajah Mada No.27A, RT.5/RW.7, Krukut, Kec. Taman Sari, Kota Jakarta Barat, DKI Jakarta 11140
+                        Jl. Gajah Mada No.27A, RT.5/RW.7<br />
+                        Krukut, Taman Sari, Jakarta Barat 11140
                       </p>
                     </div>
                   </div>
@@ -90,9 +68,9 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Telepon</h3>
-                      <a href="tel:08174147477" className="text-primary hover:text-primary/80 transition-colors text-lg font-medium">
-                        08174147477
+                      <h3 className="font-semibold text-white mb-2">Telepon</h3>
+                      <a href="tel:+628174147477" className="text-primary hover:text-primary/80 transition-colors text-lg font-medium block">
+                        +62 817 4147 477
                       </a>
                     </div>
                   </div>
@@ -105,16 +83,16 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">WhatsApp</h3>
+                      <h3 className="font-semibold text-white mb-2">WhatsApp</h3>
                       <a
                         href="https://wa.me/628174147477"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#1A7B4C] hover:text-[#166A42] transition-colors text-lg font-medium"
+                        className="text-[#1A7B4C] hover:text-[#166A42] transition-colors text-lg font-medium block"
                       >
-                        08174147477
+                        +62 817 4147 477
                       </a>
-                      <p className="text-gray-600 text-sm mt-1">Respon cepat melalui WhatsApp</p>
+                      <p className="text-gray-100 text-sm mt-1">Respon cepat melalui WhatsApp</p>
                     </div>
                   </div>
 
@@ -126,8 +104,8 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 mb-2">Email</h3>
-                      <a href="mailto:sales@baswarasolution.com" className="text-primary hover:text-primary/80 transition-colors text-lg font-medium">
+                      <h3 className="font-semibold text-white mb-2">Email</h3>
+                      <a href="mailto:sales@baswarasolution.com" className="text-primary hover:text-primary/80 transition-colors text-lg font-medium block">
                         sales@baswarasolution.com
                       </a>
                     </div>
@@ -135,138 +113,46 @@ export default function ContactPage() {
                 </div>
 
                 {/* Business Hours */}
-                <div className="mt-12 p-6 bg-gray-50 rounded-lg">
-                  <h3 className="font-semibold text-gray-900 mb-4">Jam Operasional</h3>
-                  <div className="space-y-2 text-gray-600">
-                    <div className="flex justify-between">
-                      <span>Senin - Jumat</span>
+                <div className="mt-12 p-6 bg-gray-50 rounded-lg border border-gray-200">
+                  <h3 className="font-semibold text-gray-900 mb-4 text-lg">Jam Operasional</h3>
+                  <div className="space-y-3 text-gray-600">
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Senin - Jumat</span>
                       <span>9:00 AM - 6:00 PM</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Sabtu</span>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Sabtu</span>
                       <span>9:00 AM - 4:00 PM</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Minggu</span>
-                      <span>By Appointment</span>
+                    <div className="flex justify-between items-center">
+                      <span className="font-medium">Minggu</span>
+                      <span className="text-gray-500">Dengan janji temu</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Contact Form */}
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">
-                  Kirim Pesan
-                </h2>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Nama Lengkap *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
-                      placeholder="Nama lengkap Anda"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Alamat Email *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
-                      placeholder="email.anda@example.com"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Nomor Telepon
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
-                      placeholder="+62XXXXXXXXXXX"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                      Produk yang Diminati
-                    </label>
-                    <select
-                      id="service"
-                      name="service"
-                      value={formData.service}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
-                    >
-                      <option value="">Pilih produk</option>
-                      <option value="expertpower">SATEC ExpertPower (EMS)</option>
-                      <option value="sertec">SERTEC Solutions</option>
-                      <option value="senter-ptz">Kamera PTZ SENTER</option>
-                      <option value="other">Lainnya</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Pesan *
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={6}
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200 resize-none"
-                      placeholder="Ceritakan kebutuhan proyek Anda..."
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 flex items-center justify-center"
-                  >
-                    Kirim Pesan
-                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  </button>
-                </form>
-              </div>
+              <ContactForm />
             </div>
           </div>
         </section>
 
         {/* Map or Additional Info */}
-        <section className="py-20 bg-gray-50">
-          <div className="container">
+        <section
+          className="relative py-20 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/contact us 4.jpg')",
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40" />
+          <div className="container relative">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Mengapa Memilih Kami?
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Mengapa Memilih PT. Anugerah Baswara Megah?
               </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Sejak 2013 memberikan solusi energi dan layanan yang dapat dipercaya
+              <p className="text-lg text-gray-100 max-w-3xl mx-auto">
+                Lebih dari satu dekade memberikan solusi manajemen energi yang terpercaya.
               </p>
             </div>
 
@@ -277,8 +163,8 @@ export default function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold mb-2">Pemantauan Real-time</h3>
-                <p className="text-gray-600 text-sm">Pantau konsumsi dan kualitas energi secara langsung.</p>
+                <h3 className="font-semibold mb-2 text-white">Pemantauan Real-time</h3>
+                <p className="text-gray-100 text-sm">Memantau konsumsi dan kualitas energi secara real-time dengan presisi.</p>
               </div>
 
               <div className="text-center">
@@ -287,8 +173,8 @@ export default function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                   </svg>
                 </div>
-                <h3 className="font-semibold mb-2">Analitik & Laporan</h3>
-                <p className="text-gray-600 text-sm">Dashboard dan pelaporan berbasis SATEC ExpertPower.</p>
+                <h3 className="font-semibold mb-2 text-white">Analitik & Pelaporan</h3>
+                <p className="text-gray-100 text-sm">Dashboard dan laporan komprehensif yang didukung oleh SATEC ExpertPower.</p>
               </div>
 
               <div className="text-center">
@@ -297,8 +183,8 @@ export default function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold mb-2">Integrasi Perangkat</h3>
-                <p className="text-gray-600 text-sm">Terintegrasi dengan perangkat SERTEC dan kamera PTZ SENTER.</p>
+                <h3 className="font-semibold mb-2 text-white">Integrasi Perangkat</h3>
+                <p className="text-gray-100 text-sm">Terintegrasi secara mulus dengan sistem kamera PTZ SERTEC dan SENTER.</p>
               </div>
 
               <div className="text-center">
@@ -307,8 +193,8 @@ export default function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <h3 className="font-semibold mb-2">Dukungan Lokal</h3>
-                <p className="text-gray-600 text-sm">Implementasi, pelatihan, dan dukungan purnajual.</p>
+                <h3 className="font-semibold mb-2 text-white">Dukungan Ahli</h3>
+                <p className="text-gray-100 text-sm">Layanan implementasi, pelatihan, dan dukungan purna jual yang komprehensif.</p>
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import RichTextEditor from "@/components/RichTextEditor";
 import type { NewsItem } from "@/lib/newsStore";
 
 const STORAGE_KEY = "adminNewsAuth";
@@ -17,6 +18,7 @@ export default function AdminNewsPage() {
 
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
+  const [content, setContent] = useState("");
   const [date, setDate] = useState("");
   const [url, setUrl] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -58,6 +60,7 @@ export default function AdminNewsPage() {
     setEditingId(item.id);
     setTitle(item.title);
     setSummary(item.summary);
+    setContent(item.content || "");
     setDate(item.date || "");
     setUrl(item.url || "");
     setImageUrl(item.imageUrl || "");
@@ -72,6 +75,7 @@ export default function AdminNewsPage() {
     setEditingId(null);
     setTitle("");
     setSummary("");
+    setContent("");
     setDate("");
     setUrl("");
     setImageUrl("");
@@ -139,7 +143,7 @@ export default function AdminNewsPage() {
         }
       }
 
-      const payload = { title, summary, date, url, imageUrl: finalImageUrl || undefined };
+      const payload = { title, summary, content, date, url, imageUrl: finalImageUrl || undefined };
 
       const res = await fetch(editingId ? `/api/news/${editingId}` : "/api/news", {
         method: editingId ? "PUT" : "POST",
@@ -166,6 +170,7 @@ export default function AdminNewsPage() {
 
       setTitle("");
       setSummary("");
+      setContent("");
       setDate("");
       setUrl("");
       setImageUrl("");
@@ -321,6 +326,23 @@ export default function AdminNewsPage() {
                   placeholder="Ringkasan singkat berita atau event"
                   required
                 />
+                <p className="text-xs text-gray-500 mt-1">
+                  Ringkasan akan tampil di halaman daftar berita. Untuk artikel lengkap, gunakan editor di bawah.
+                </p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Artikel Lengkap (opsional)
+                </label>
+                <RichTextEditor
+                  value={content}
+                  onChange={setContent}
+                  placeholder="Tulis artikel lengkap dengan format profesional di sini. Anda bisa menambahkan heading, bold, italic, list, link, gambar, dan lainnya..."
+                />
+                <p className="text-xs text-gray-500 mt-2">
+                  Gunakan toolbar di atas untuk memformat artikel. Artikel ini akan tampil di halaman detail berita.
+                </p>
               </div>
 
               <button
@@ -359,6 +381,7 @@ export default function AdminNewsPage() {
                         <img
                           src={item.imageUrl}
                           alt={item.title}
+                          loading="lazy"
                           className="w-full h-full object-cover"
                         />
                       </div>

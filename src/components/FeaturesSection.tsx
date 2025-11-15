@@ -1,92 +1,88 @@
 const features = [
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M12 20c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z" />
-      </svg>
-    ),
-    title: "Pemantauan Real-time",
-    description: "Pantau konsumsi dan kualitas energi secara langsung untuk keputusan cepat dan akurat."
+    title: "Commercial",
+    description:
+      "Solusi EMS untuk gedung komersial seperti pusat perbelanjaan, perkantoran, dan hotel.",
+    image: "/commercial.jpg",
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 11V7a4 4 0 118 0v4M5 13l4 4L19 7" />
-      </svg>
-    ),
-    title: "Analitik & Laporan",
-    description: "Dashboard, pelaporan kepatuhan, dan analitik untuk efisiensi operasional (SATEC ExpertPower)."
+    title: "Industrial",
+    description:
+      "Monitoring energi presisi untuk fasilitas industri dengan beban tinggi dan proses kritikal.",
+    image: "/industrial.jpg",
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    title: "Integrasi Perangkat",
-    description: "Terintegrasi dengan perangkat SERTEC dan kamera PTZ SENTER untuk monitoring & proteksi."
+    title: "Renewables & Generation",
+    description:
+      "Optimasi performa pembangkit dan integrasi energi terbarukan dalam satu platform.",
+    image: "/renewable.jpg",
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7h18M3 12h18M3 17h18" />
-      </svg>
-    ),
-    title: "Skalabel & Fleksibel",
-    description: "Cocok untuk gedung komersial, industri, dan utilitas—dari pilot hingga enterprise."
+    title: "Public Facilities",
+    description:
+      "Pengelolaan energi untuk fasilitas publik seperti rumah sakit, kampus, dan gedung pemerintahan.",
+    image: "/public facilities.jpg",
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0-1.657 1.343-3 3-3h3m-6 6c0 1.657-1.343 3-3 3H6" />
-      </svg>
-    ),
-    title: "Dukungan Lokal",
-    description: "Tim siap membantu implementasi, pelatihan, dan after-sales service."
+    title: "Utilities",
+    description:
+      "Visibilitas menyeluruh untuk jaringan distribusi dan transmisi perusahaan utilitas.",
+    image: "/utilities.jpg",
   },
   {
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c1.657 0 3 1.343 3 3v4H9v-4c0-1.657 1.343-3 3-3z" />
-      </svg>
-    ),
-    title: "Keamanan Data",
-    description: "Standar keamanan tinggi untuk melindungi data operasional dan kepatuhan Anda."
-  }
+    title: "Data Centers",
+    description:
+      "Kontrol dan pemantauan energi yang andal untuk pusat data dengan SLA ketat.",
+    image: "/data center.jpg",
+  },
 ];
 
 export default function FeaturesSection() {
   return (
-    <section className="py-20 bg-white">
-      <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+    <section
+      className="py-20 relative"
+      style={{
+        backgroundImage: "url('/mengapamemilihkamibg.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="relative container">
+        <div className="text-center mb-16 text-white">
+          <h2 className="text-4xl font-bold mb-4">
             Mengapa Memilih EMS Kami?
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Solusi terpadu berbasis SATEC ExpertPower untuk meningkatkan efisiensi energi,
-            mengurangi biaya, dan meningkatkan keandalan operasional.
+          <p className="text-xl max-w-3xl mx-auto text-gray-100">
+            ExpertPower Cloud Energy Management Systems menghadirkan Monitoring Energi
+            Presisi, Analisa Kualitas Daya, Tarif TOU/Pola Tarif PLN, serta Kontrol
+            Otomatis untuk Meningkatkan Efisiensi dan Keandalan Listrik.
           </p>
         </div>
-
-        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 -mx-4 md:mx-0 md:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-6 md:overflow-visible">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex items-start gap-4 p-6 rounded-lg hover:shadow-lg transition-all duration-300 group bg-white min-w-[280px] snap-start"
+              className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
             >
-              <div className="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                {feature.icon}
+              <div className="relative h-40 md:h-56 overflow-hidden">
+                <div
+                  className="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                  style={{
+                    backgroundImage: `url('${feature.image}')`,
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </div>
 
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <div className="p-4 md:p-6">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 md:mb-3 group-hover:text-primary transition-colors">
                   {feature.title}
                 </h3>
-
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {feature.description}
-                </p>
+                {feature.description && (
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
+                )}
               </div>
             </div>
           ))}

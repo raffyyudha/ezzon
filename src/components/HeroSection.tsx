@@ -3,30 +3,47 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+import desktop1 from "@/images/1.png";
+import desktop2 from "@/images/2.png";
+import desktop3 from "@/images/3.png";
+import desktop4 from "@/images/4.png";
+import android1 from "@/android 1.png";
+import android2 from "@/android 2.png";
+import android3 from "@/android 3.png";
+import android4 from "@/android 4.png";
+
 const slides = [
   {
     id: 1,
-    imageMobile: "/images/slider-1.jpg",
-    imageDesktop: "/images/landscape-1.png",
+    imageMobile: android1.src,
+    imageDesktop: desktop1.src,
     title: "Energy Management Systems",
     subtitle:
       "Pantau, analisis, dan optimalkan konsumsi energi Anda secara real-time",
   },
   {
     id: 2,
-    imageMobile: "/images/slider-2.jpg",
-    imageDesktop: "/images/landscape-2.png",
+    imageMobile: android2.src,
+    imageDesktop: desktop2.src,
     title: "SATEC ExpertPower (EMS)",
     subtitle:
       "Dashboard energi, pelaporan, dan analitik untuk efisiensi operasional",
   },
   {
     id: 3,
-    imageMobile: "/images/slider-3.jpg",
-    imageDesktop: "/images/landscape-3.png",
+    imageMobile: android3.src,
+    imageDesktop: desktop3.src,
     title: "Integrasi SERTEC & Kamera PTZ SENTER",
     subtitle:
       "Perangkat pendukung untuk monitoring, proteksi, dan inspeksi jaringan",
+  },
+  {
+    id: 4,
+    imageMobile: android4.src,
+    imageDesktop: desktop4.src,
+    title: "Solusi Energi Terintegrasi",
+    subtitle:
+      "Dari monitoring hingga proteksi, satu platform untuk semua kebutuhan energi Anda",
   },
 ];
 
@@ -43,7 +60,7 @@ export default function HeroSection() {
 
   return (
     <>
-    <section className="relative w-full md:w-screen h-[60vh] md:h-screen min-h-[400px] md:min-h-[600px] overflow-hidden">
+    <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -53,18 +70,32 @@ export default function HeroSection() {
         >
           {/* Mobile background */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat md:hidden"
-            style={{ backgroundImage: `url(${slide.imageMobile})` }}
+            className="absolute inset-0 bg-no-repeat md:hidden"
+            style={{
+              backgroundImage: `url('${slide.imageMobile}')`,
+              backgroundSize: "100% 100%",
+              backgroundPosition: "center",
+            }}
           />
           {/* Desktop background */}
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
-            style={{ backgroundImage: `url(${slide.imageDesktop})` }}
+            style={{ backgroundImage: `url('${slide.imageDesktop}')` }}
           />
           
           
         </div>
       ))}
+
+      {/* CTA Button */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex justify-center">
+        <Link
+          href="/products"
+          className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-semibold shadow-lg text-sm"
+        >
+          Lihat Produk
+        </Link>
+      </div>
 
       {/* Slide Indicators */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
@@ -81,14 +112,6 @@ export default function HeroSection() {
         ))}
       </div>
     </section>
-    <div className="container mt-4 md:mt-6 flex justify-center">
-      <Link
-        href="/products"
-        className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-semibold shadow-lg text-sm"
-      >
-        Lihat Produk
-      </Link>
-    </div>
     </>
   );
 }

@@ -152,7 +152,7 @@ export default function ChatWidget() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center justify-center rounded-full bg-[#FC0002] hover:bg-[#e00002] text-white w-12 h-12 shadow-lg"
+        className="inline-flex items-center justify-center rounded-full bg-black hover:bg-black/80 text-white w-12 h-12 shadow-lg"
         aria-label="Buka chatbot Baswara AI"
       >
         <span className="text-lg font-bold">AI</span>

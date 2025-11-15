@@ -4,6 +4,7 @@ export type NewsItem = {
   id: string;
   title: string;
   summary: string;
+  content?: string; // HTML content untuk artikel lengkap
   date: string; // YYYY-MM-DD
   url?: string;
   imageUrl?: string;
@@ -12,6 +13,7 @@ export type NewsItem = {
 export type NewsInput = {
   title: string;
   summary: string;
+  content?: string; // HTML content
   date?: string;
   url?: string;
   imageUrl?: string;
@@ -21,6 +23,7 @@ type NewsRow = {
   id: string;
   title: string;
   summary: string;
+  content: string | null;
   date: string;
   url: string | null;
   image_url: string | null;
@@ -29,7 +32,7 @@ type NewsRow = {
 export async function getAllNews(): Promise<NewsItem[]> {
   const { data, error } = await supabase
     .from("news")
-    .select("id, title, summary, date, url, image_url")
+    .select("id, title, summary, content, date, url, image_url")
     .order("date", { ascending: false });
 
   if (error) {
@@ -41,6 +44,7 @@ export async function getAllNews(): Promise<NewsItem[]> {
     id: row.id,
     title: row.title,
     summary: row.summary,
+    content: row.content ?? undefined,
     date: row.date,
     url: row.url ?? undefined,
     imageUrl: row.image_url ?? undefined,
@@ -52,7 +56,7 @@ export async function getNewsById(id: string): Promise<NewsItem | null> {
 
   const { data, error } = await supabase
     .from("news")
-    .select("id, title, summary, date, url, image_url")
+    .select("id, title, summary, content, date, url, image_url")
     .eq("id", id)
     .maybeSingle();
 
@@ -67,6 +71,7 @@ export async function getNewsById(id: string): Promise<NewsItem | null> {
     id: data.id,
     title: data.title,
     summary: data.summary,
+    content: data.content ?? undefined,
     date: data.date,
     url: data.url ?? undefined,
     imageUrl: data.image_url ?? undefined,
@@ -89,12 +94,13 @@ export async function updateNews(id: string, input: NewsInput): Promise<NewsItem
     .update({
       title: input.title,
       summary: input.summary,
+      content: input.content ?? null,
       date,
       url: input.url ?? null,
       image_url: input.imageUrl ?? null,
     })
     .eq("id", id)
-    .select("id, title, summary, date, url, image_url")
+    .select("id, title, summary, content, date, url, image_url")
     .single();
 
   if (error) {
@@ -106,6 +112,7 @@ export async function updateNews(id: string, input: NewsInput): Promise<NewsItem
     id: data.id,
     title: data.title,
     summary: data.summary,
+    content: data.content ?? undefined,
     date: data.date,
     url: data.url ?? undefined,
     imageUrl: data.image_url ?? undefined,
@@ -141,11 +148,12 @@ export async function addNews(input: NewsInput): Promise<NewsItem> {
     .insert({
       title: input.title,
       summary: input.summary,
+      content: input.content ?? null,
       date,
       url: input.url ?? null,
       image_url: input.imageUrl ?? null,
     })
-    .select("id, title, summary, date, url, image_url")
+    .select("id, title, summary, content, date, url, image_url")
     .single();
 
   if (error) {
@@ -157,6 +165,7 @@ export async function addNews(input: NewsInput): Promise<NewsItem> {
     id: data.id,
     title: data.title,
     summary: data.summary,
+    content: data.content ?? undefined,
     date: data.date,
     url: data.url ?? undefined,
     imageUrl: data.image_url ?? undefined,
