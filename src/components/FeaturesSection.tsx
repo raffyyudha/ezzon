@@ -1,9 +1,13 @@
+import utilitiesImage from "@/images/utilities.jpg";
+import renewableImage from "@/images/renewable.jpg";
+import komersialImage from "@/images/komersial.jpg";
+
 const features = [
   {
     title: "Commercial",
     description:
       "Solusi EMS untuk gedung komersial seperti pusat perbelanjaan, perkantoran, dan hotel.",
-    image: "/commercial.jpg",
+    image: komersialImage.src,
   },
   {
     title: "Industrial",
@@ -15,7 +19,7 @@ const features = [
     title: "Renewables & Generation",
     description:
       "Optimasi performa pembangkit dan integrasi energi terbarukan dalam satu platform.",
-    image: "/renewable.jpg",
+    image: renewableImage.src,
   },
   {
     title: "Public Facilities",
@@ -27,7 +31,7 @@ const features = [
     title: "Utilities",
     description:
       "Visibilitas menyeluruh untuk jaringan distribusi dan transmisi perusahaan utilitas.",
-    image: "/utilities.jpg",
+    image: utilitiesImage.src,
   },
   {
     title: "Data Centers",

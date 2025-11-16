@@ -1,4 +1,5 @@
 import Link from "next/link";
+import bgbaru3 from "@/bgbaru3.jpg";
 
 const services = [
   {
@@ -7,7 +8,6 @@ const services = [
     description: "Platform Sistem Manajemen Energi",
     image: "/products/satec/expertpower.webp",
     link: "/products#expertpower-(ems)",
-    bg: "/bgsemua.png",
   },
   {
     id: 2,
@@ -16,7 +16,6 @@ const services = [
       "Power Quality Analyzer multi kanal dan Power Meter untuk pemantauan kualitas daya",
     image: "/products/satec/pm17x-pro.webp",
     link: "/products#satec",
-    bg: "/bgsemua.png",
   },
   {
     id: 3,
@@ -24,7 +23,6 @@ const services = [
     description: "Perangkat Pencegahan Petir",
     image: "/products/sertec/sertec-thumbnail.png",
     link: "/products#sertec",
-    bg: "/bgsemua.png",
   },
 ];
 
@@ -36,7 +34,7 @@ export default function ServicesSection() {
           key={service.id}
           className="py-16 bg-cover bg-center"
           style={{
-            backgroundImage: `url('${service.bg}')`,
+            backgroundImage: `url('${bgbaru3.src}')`,
           }}
         >
           <div className="container">

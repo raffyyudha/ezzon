@@ -6,11 +6,9 @@ import Link from "next/link";
 import desktop1 from "@/images/1.png";
 import desktop2 from "@/images/2.png";
 import desktop3 from "@/images/3.png";
-import desktop4 from "@/images/4.png";
 import android1 from "@/android 1.png";
 import android2 from "@/android 2.png";
 import android3 from "@/android 3.png";
-import android4 from "@/android 4.png";
 
 const slides = [
   {
@@ -37,18 +35,12 @@ const slides = [
     subtitle:
       "Perangkat pendukung untuk monitoring, proteksi, dan inspeksi jaringan",
   },
-  {
-    id: 4,
-    imageMobile: android4.src,
-    imageDesktop: desktop4.src,
-    title: "Solusi Energi Terintegrasi",
-    subtitle:
-      "Dari monitoring hingga proteksi, satu platform untuk semua kebutuhan energi Anda",
-  },
 ];
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const safeCurrentSlide = slides.length > 0 ? currentSlide % slides.length : 0;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -65,7 +57,7 @@ export default function HeroSection() {
         <div
           key={slide.id}
           className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
+            index === safeCurrentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
           {/* Mobile background */}
@@ -104,7 +96,7 @@ export default function HeroSection() {
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-200 ${
-              index === currentSlide
+              index === safeCurrentSlide
                 ? "bg-primary scale-125"
                 : "bg-white/50 hover:bg-white/75"
             }`}
