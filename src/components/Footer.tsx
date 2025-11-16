@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/images/logo.png";
+import isoLogo from "@/iso.png";
 import { getAllNews, type NewsItem } from "@/lib/newsStore";
 
 function formatDate(value: string) {
@@ -67,11 +68,14 @@ export default async function Footer() {
               </p>
             </div>
 
-            <div className="mt-6 inline-flex items-center justify-center border-2 border-gray-700 px-6 py-3">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-gray-900">ISO</div>
-                <div className="text-xs font-semibold text-gray-700">9001:2015</div>
-              </div>
+            <div className="mt-6 inline-flex items-center justify-center">
+              <Image
+                src={isoLogo}
+                alt="ISO 9001:2015"
+                width={120}
+                height={120}
+                className="object-contain"
+              />
             </div>
           </div>
 
