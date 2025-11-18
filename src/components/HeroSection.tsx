@@ -3,12 +3,12 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-import desktop1 from "@/images/1.png";
-import desktop2 from "@/images/2.png";
-import desktop3 from "@/images/3.png";
-import android1 from "@/android 1.png";
-import android2 from "@/android 2.png";
-import android3 from "@/android 3.png";
+import desktop1 from "@/images/1.webp";
+import desktop2 from "@/images/2.webp";
+import desktop3 from "@/images/3.webp";
+import android1 from "@/android1.webp";
+import android2 from "@/android2.webp";
+import android3 from "@/android3.webp";
 
 const slides = [
   {
@@ -55,7 +55,7 @@ export default function HeroSection() {
     <section
       className="relative w-full h-screen min-h-[600px] overflow-hidden bg-cover bg-center"
       style={{
-        backgroundImage: "url('/bghitam.jpg')",
+        backgroundImage: "url('/bghitam.webp')",
       }}
     >
       {slides.map((slide, index) => (

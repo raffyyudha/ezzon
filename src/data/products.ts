@@ -56,7 +56,7 @@ export const products: Product[] = [
     description:
       "Proteksi petir de-ionisasi untuk bangunan, substation, dan area industri berskala besar.",
     features: ["Radius proteksi besar", "Teknologi de-ionisasi", "Aplikasi industri"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl:
       "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
@@ -72,7 +72,7 @@ export const products: Product[] = [
       "Dimensions: Ø 12,5 cm x 21,6 cm",
       "Packaging: Galvanized metal"
     ],
-    image: "/products/sertec/cmce-marine-gold.png",
+    image: "/products/sertec/cmce-marine-gold.webp",
     externalUrl:
       "https://marine.sertec.com.py/wp-content/uploads/2025/03/BROCHURE-Marine-ENG-2024.pdf",
   },
@@ -83,7 +83,7 @@ export const products: Product[] = [
     category: "Meters & Analyzers",
     description: "Power meter & smart transducer untuk pengukuran energi.",
     features: ["Smart transducer", "Pengukuran energi"],
-    image: "/products/satec/em132.jpg",
+    image: "/products/satec/em132.webp",
     externalUrl: "https://www.satec-global.com/products/em132/",
   },
   {
@@ -243,7 +243,7 @@ export const products: Product[] = [
     category: "Current Sensors",
     description: "CTs untuk meter versi HACS.",
     features: ["Akurasi tinggi"],
-    image: "/products/satec/hacs.jpg",
+    image: "/products/satec/hacs.webp",
     externalUrl: "https://www.satec-global.com/products/hacs/",
   },
   {
@@ -263,7 +263,7 @@ export const products: Product[] = [
     category: "Accessories",
     description: "Gateway, data-logger, dan COM converter.",
     features: ["Gateway", "Data-logger"],
-    image: "/products/satec/etc-ii.jpg",
+    image: "/products/satec/etc-ii.webp",
     externalUrl: "https://www.satec-global.com/products/etc-ii/",
   },
   {
@@ -293,7 +293,7 @@ export const products: Product[] = [
     category: "Lightning Protection (CMCE)",
     description: "Proteksi untuk struktur kecil sesuai radius cakupan.",
     features: ["Ringan", "Radius kecil"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
   {
@@ -303,7 +303,7 @@ export const products: Product[] = [
     category: "Lightning Protection (CMCE)",
     description: "Untuk bangunan/perumahan/tower telekomunikasi menengah.",
     features: ["Radius sedang"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
   {
@@ -313,7 +313,7 @@ export const products: Product[] = [
     category: "Lightning Protection (CMCE)",
     description: "Resistansi isolasi hingga 400°C untuk area temperatur tinggi.",
     features: ["Hight-temp"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
   {
@@ -323,7 +323,7 @@ export const products: Product[] = [
     category: "Lightning Protection (CMCE)",
     description: "Model bersertifikasi UL-96.",
     features: ["UL-96"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
   {
@@ -333,7 +333,7 @@ export const products: Product[] = [
     category: "Lightning Protection (CMCE)",
     description: "Untuk struktur bergetar (rig pengeboran, platform).",
     features: ["Anti-jatuh", "Kohesi partikel lebih baik"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
   {
@@ -343,7 +343,7 @@ export const products: Product[] = [
     category: "Lightning Protection (CMCE)",
     description: "Untuk lingkungan sangat korosif (baja tahan korosi tinggi).",
     features: ["Korosi tinggi"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
   {
@@ -353,7 +353,7 @@ export const products: Product[] = [
     category: "Lightning Protection (CMCE)",
     description: "Untuk aplikasi khusus/militer, berbasis material graphene.",
     features: ["Graphene"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
   {
@@ -363,7 +363,7 @@ export const products: Product[] = [
     category: "Lightning Protection (CMCE)",
     description: "Untuk kondisi medan listrik ekstrim, turbin angin, solar park.",
     features: ["Efisiensi tinggi"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/wp-content/uploads/2024/10/BROCHURE-2024-CMCE-A4-ESP.pdf",
   },
   {
@@ -373,7 +373,7 @@ export const products: Product[] = [
     category: "Monitoring",
     description: "Sistem monitoring CMCE (drainage, suhu, dll).",
     features: ["Monitoring"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/en/",
   },
   {
@@ -383,7 +383,7 @@ export const products: Product[] = [
     category: "Beacons",
     description: "Penanda untuk bangunan/tower/kegiatan navigasi.",
     features: ["Solar beacon"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/en/",
   },
   {
@@ -393,7 +393,7 @@ export const products: Product[] = [
     category: "Surge Protection",
     description: "Proteksi lonjakan tegangan asal atmosfer.",
     features: ["Surge protection"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/en/",
   },
   {
@@ -403,7 +403,7 @@ export const products: Product[] = [
     category: "Grounding",
     description: "Zinc rods, copper rods & aksesoris untuk sistem grounding.",
     features: ["Grounding"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/en/",
   },
   {
@@ -413,7 +413,7 @@ export const products: Product[] = [
     category: "Power Generation",
     description: "Genset industrial & rumahan (5kVA - 1500kVA).",
     features: ["Genset"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/en/",
   },
   {
@@ -423,7 +423,7 @@ export const products: Product[] = [
     category: "Services",
     description: "Kontrak pemeliharaan (radiobase, genset, grounding).",
     features: ["Maintenance"],
-    image: "/products/sertec/cmce-120.jpg",
+    image: "/products/sertec/cmce-120.webp",
     externalUrl: "https://sertec.com.py/en/",
   },
   {
@@ -438,7 +438,7 @@ export const products: Product[] = [
       "Dimensions: Ø 16,25 cm x 25,67 cm",
       "Packaging: Galvanized metal material"
     ],
-    image: "/products/sertec/cmce-marine-platinum.png",
+    image: "/products/sertec/cmce-marine-platinum.webp",
     externalUrl: "https://marine.sertec.com.py/wp-content/uploads/2025/03/BROCHURE-Marine-ENG-2024.pdf",
   },
   {
@@ -453,7 +453,7 @@ export const products: Product[] = [
       "Dimensions: Ø 25 cm x 37,8 cm",
       "Packaging: Galvanized metal material"
     ],
-    image: "/products/sertec/cmce-marine-diamond.png",
+    image: "/products/sertec/cmce-marine-diamond.webp",
     externalUrl: "https://marine.sertec.com.py/wp-content/uploads/2025/03/BROCHURE-Marine-ENG-2024.pdf",
   },
 ];

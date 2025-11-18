@@ -1,6 +1,6 @@
-import utilitiesImage from "@/images/utilities.jpg";
-import renewableImage from "@/images/renewable.jpg";
-import komersialImage from "@/images/komersial.jpg";
+import utilitiesImage from "@/images/utilities.webp";
+import renewableImage from "@/images/renewable.webp";
+import komersialImage from "@/images/komersial.webp";
 
 const features = [
   {
@@ -13,7 +13,7 @@ const features = [
     title: "Industrial",
     description:
       "Monitoring energi presisi untuk fasilitas industri dengan beban tinggi dan proses kritikal.",
-    image: "/industrial.jpg",
+    image: "/industrial.webp",
   },
   {
     title: "Renewables & Generation",
@@ -25,7 +25,7 @@ const features = [
     title: "Public Facilities",
     description:
       "Pengelolaan energi untuk fasilitas publik seperti rumah sakit, kampus, dan gedung pemerintahan.",
-    image: "/public facilities.jpg",
+    image: "/public facilities.webp",
   },
   {
     title: "Utilities",
@@ -37,7 +37,7 @@ const features = [
     title: "Data Centers",
     description:
       "Kontrol dan pemantauan energi yang andal untuk pusat data dengan SLA ketat.",
-    image: "/data center.jpg",
+    image: "/data center.webp",
   },
 ];
 
@@ -46,7 +46,7 @@ export default function FeaturesSection() {
     <section
       className="py-20 relative"
       style={{
-        backgroundImage: "url('/mengapamemilihkamibg.jpg')",
+        backgroundImage: "url('/mengapamemilihkamibg.webp')",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

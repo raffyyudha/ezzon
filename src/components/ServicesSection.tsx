@@ -1,10 +1,10 @@
 import Link from "next/link";
-import expertLogo from "@/filebaru/expertlogo.png";
-import expertProduct from "@/filebaru/expertpowerprodukganteng.png";
-import satecLogo from "@/filebaru/satecckckckc.png";
-import satecProduct from "@/filebaru/satec.png";
-import sertecLogo from "@/filebaru/sertecfafae.png";
-import sertecProduct from "@/filebaru/sertecprodukt.png";
+import expertLogo from "@/filebaru/expertlogo.webp";
+import expertProduct from "@/filebaru/expertpowerprodukganteng.webp";
+import satecLogo from "@/filebaru/satecckckckc.webp";
+import satecProduct from "@/filebaru/satec.webp";
+import sertecLogo from "@/filebaru/sertecfafae.webp";
+import sertecProduct from "@/filebaru/sertecprodukt.webp";
 
 const services = [
   {
@@ -60,7 +60,7 @@ export default function ServicesSection() {
           key={service.id}
           className="py-12 md:py-16 bg-cover bg-center"
           style={{
-            backgroundImage: "url('/bghitam.jpg')",
+            backgroundImage: "url('/bghitam.webp')",
           }}
         >
           <div className="container">

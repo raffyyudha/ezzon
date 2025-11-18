@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/images/logo.png";
+import logo from "@/images/logo.webp";
 import { getAllNews, type NewsItem } from "@/lib/newsStore";
 
 function formatDate(value: string) {
@@ -69,7 +69,7 @@ export default async function Footer() {
 
             <div className="mt-6 inline-flex items-center justify-center">
               <Image
-                src="/isologo.png"
+                src="/isologo.webp"
                 alt="ISO 9001:2015"
                 width={120}
                 height={120}
@@ -122,7 +122,7 @@ export default async function Footer() {
                         <div
                           className="absolute inset-0 bg-cover bg-center"
                           style={{ 
-                            backgroundImage: `url(${post.imageUrl || '/images/hero-berita-event.png'})` 
+                            backgroundImage: `url(${post.imageUrl || '/images/hero-berita-event.webp'})` 
                           }}
                         />
                       </div>

@@ -13,7 +13,7 @@ export default async function ContactPage() {
         <section className="bg-black py-10 sm:py-12 md:py-14">
           <div className="container flex items-center justify-center">
             <img
-              src="/kontakk.png"
+              src="/kontakk.webp"
               alt="Hubungi Kami"
               loading="lazy"
               className="w-full max-w-4xl h-auto object-contain"
@@ -25,7 +25,7 @@ export default async function ContactPage() {
         <section
           className="relative py-20 bg-cover bg-center"
           style={{
-            backgroundImage: "url('/contact us 2.jpg')",
+            backgroundImage: "url('/contact us 2.webp')",
           }}
         >
           <div className="absolute inset-0 bg-black/60" />
@@ -142,7 +142,7 @@ export default async function ContactPage() {
         <section
           className="relative py-20 bg-cover bg-center"
           style={{
-            backgroundImage: "url('/contact us 4.jpg')",
+            backgroundImage: "url('/contact us 4.webp')",
           }}
         >
           <div className="absolute inset-0 bg-black/40" />

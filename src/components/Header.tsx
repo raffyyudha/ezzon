@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/images/logo.png";
+import logo from "@/images/logo.webp";
 import { usePathname } from "next/navigation";
 
 export default function Header() {

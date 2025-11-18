@@ -12,7 +12,7 @@ const solutions: Solution[] = [
   {
     id: "billing-pq",
     title: "Billing, Revenue (TOU) dan Monitoring Kualitas Daya",
-    image: "/images/solutions/billing-monitoring.jpg",
+    image: "/images/solutions/billing-monitoring.webp",
     paragraphs: [
       "Solusi pengukuran billing dan revenue mencakup banyak kWh meter, berbagai platform komunikasi, serta perangkat lunak manajemen yang terintegrasi.",
       "Penagihan sub-tenant umum digunakan di berbagai fasilitas seperti apartemen, asrama mahasiswa, pusat perbelanjaan, dan data center. Sistem ini menyediakan kontrol penuh, pengukuran energi Time of Use (TOU), serta pengelolaan tagihan dan invoice.",
@@ -22,7 +22,7 @@ const solutions: Solution[] = [
   {
     id: "ess",
     title: "Sistem Penyimpanan Energi (ESS)",
-    image: "/images/solutions/energy-storage.jpg",
+    image: "/images/solutions/energy-storage.webp",
     paragraphs: [
       "Sistem penyimpanan energi berbasis baterai (BESS) untuk manajemen beban puncak (peak shaving), cadangan daya (backup), integrasi energi terbarukan, dan optimasi biaya energi.",
       "Terintegrasi dengan BMS, PCS/solar inverter, serta EMS untuk kontrol cerdas. Mendukung mode operasi seperti arbitrase energi, time-shifting, dan frequency response.",
@@ -32,7 +32,7 @@ const solutions: Solution[] = [
   {
     id: "rental",
     title: "Rental Energi",
-    image: "/images/solutions/energy-rental.jpg",
+    image: "/images/solutions/energy-rental.webp",
     paragraphs: [
       "Layanan sewa solusi energi untuk kebutuhan sementara atau proyek pilot—mulai dari meter/panel monitoring hingga genset atau ESS mobile.",
       "Masa sewa fleksibel dengan paket instalasi, operasi, dan pemeliharaan. Cocok untuk event, lokasi konstruksi, dan uji coba sistem tanpa investasi awal yang besar.",
@@ -41,7 +41,7 @@ const solutions: Solution[] = [
   {
     id: "lightning",
     title: "Solusi Proteksi Petir",
-    image: "/images/solutions/lightning-protection.jpg",
+    image: "/images/solutions/lightning-protection.webp",
     paragraphs: [
       "Solusi proteksi petir menggunakan teknologi SERTEC CMCE untuk menurunkan gradien medan listrik dan meminimalkan risiko sambaran langsung.",
       "Aplikasi luas pada bangunan industri, fasilitas komersial, area pelabuhan, dan lingkungan maritim. Tersedia varian CMCE (Gold/Platinum/Diamond) sesuai skala proteksi.",
@@ -60,7 +60,7 @@ export default function SolutionsPage() {
         <section className="relative py-16">
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/hero-solusi.png')" }}
+            style={{ backgroundImage: "url('/images/hero-solusi.webp')" }}
           />
           <div className="absolute inset-0 bg-black/40" />
           <div className="container relative">

@@ -23,7 +23,7 @@ function formatDate(value: string) {
 function getImageUrl(item: NewsItem) {
   return item.imageUrl && item.imageUrl.trim() !== ""
     ? item.imageUrl
-    : "/images/hero-berita-event.png";
+    : "/images/hero-berita-event.webp";
 }
 
 export default async function NewsPage() {
@@ -39,12 +39,12 @@ export default async function NewsPage() {
           {/* Mobile background */}
           <div
             className="absolute inset-0 bg-cover bg-center md:hidden"
-            style={{ backgroundImage: "url('/news-mobile.png')" }}
+            style={{ backgroundImage: "url('/news-mobile.webp')" }}
           />
           {/* Desktop background */}
           <div
             className="absolute inset-0 bg-cover bg-center hidden md:block"
-            style={{ backgroundImage: "url('/news-desktop.png')" }}
+            style={{ backgroundImage: "url('/news-desktop.webp')" }}
           />
           <div className="container relative flex items-center justify-center">
             {/* Spacer untuk tinggi hero */}

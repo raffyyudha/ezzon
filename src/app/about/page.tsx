@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
-import logo from "@/images/logo.png";
+import logo from "@/images/logo.webp";
 
 export default function AboutPage() {
   return (
@@ -13,7 +13,7 @@ export default function AboutPage() {
         <section className="relative py-16">
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/hero-tentang-kami.png')" }}
+            style={{ backgroundImage: "url('/images/hero-tentang-kami.webp')" }}
           />
           <div className="absolute inset-0 bg-black/40" />
           <div className="container relative">
