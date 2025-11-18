@@ -69,7 +69,7 @@ export default async function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-white mb-2">Telepon</h3>
-                      <a href="tel:+628174147477" className="text-primary hover:text-primary/80 transition-colors text-lg font-medium block">
+                      <a href="tel:+628174147477" className="text-white hover:text-gray-300 transition-colors text-lg font-medium block">
                         +62 817 4147 477
                       </a>
                     </div>
