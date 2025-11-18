@@ -160,17 +160,17 @@ export default function ServicesPage() {
                 <ul className="list-disc pl-6 space-y-2 text-primary">
                   <li><a href="https://www.satec-global.com/products/em132/" target="_blank" rel="noopener noreferrer">EM132 Smart Transducer</a></li>
                   <li><a href="https://www.satec-global.com/products/em133-power-meter/" target="_blank" rel="noopener noreferrer">EM133 Energy & Power Meter</a></li>
-                  <li><a href="https://www.satec-global.com/products/pm130-plus/" target="_blank" rel="noopener noreferrer">PM130 PLUS LED Panel Meter</a></li>
-                  <li><a href="https://www.satec-global.com/products/pm135/" target="_blank" rel="noopener noreferrer">PM135 LCD Panel Meter</a></li>
+                  <li><a href="https://www.satec-global.com/products/pm130-plus/" target="_blank" rel="noopener noreferrer">PM130-PLUS Series</a></li>
+                  <li><a href="https://www.satec-global.com/products/pm135/" target="_blank" rel="noopener noreferrer">PM135-PLUS Series</a></li>
                   <li><a href="https://www.satec-global.com/products/pm172/" target="_blank" rel="noopener noreferrer">PM172 High Accuracy Power Meter</a></li>
                   <li><a href="https://www.satec-global.com/products/pm174/" target="_blank" rel="noopener noreferrer">PM174 IEEE 1159 Power Quality Analyzer</a></li>
                   <li><a href="https://www.satec-global.com/products/pm175/" target="_blank" rel="noopener noreferrer">PM175 EN50160 Power Quality Analyzer</a></li>
                   <li><a href="https://www.satec-global.com/products/em720/" target="_blank" rel="noopener noreferrer">EM720 Revenue Meter & PQ Analyzer</a></li>
                   <li><a href="https://www.satec-global.com/products/em920/" target="_blank" rel="noopener noreferrer">EM920 Revenue Meter & PQ Analyzer</a></li>
-                  <li><a href="https://www.satec-global.com/products/bfm136/" target="_blank" rel="noopener noreferrer">BFM136 Multi-Circuit Energy Meter</a></li>
-                  <li><a href="https://www.satec-global.com/products/bfm-ii/" target="_blank" rel="noopener noreferrer">BFM-II Multi-circuit Power Meter</a></li>
-                  <li><a href="https://www.satec-global.com/products/bfm-dfr/" target="_blank" rel="noopener noreferrer">BFM-DFR Multi-Circuit Fault Recorder</a></li>
-                  <li><a href="https://www.satec-global.com/products/pro-series-power-meter/" target="_blank" rel="noopener noreferrer">PRO Series NextGen Analyzer</a></li>
+                  <li><a href="https://www.satec-global.com/products/bfm136/" target="_blank" rel="noopener noreferrer">BFM136 Multi-Channel Energy Meter</a></li>
+                  <li><a href="https://www.satec-global.com/products/bfm-ii/" target="_blank" rel="noopener noreferrer">BFM-II Multi-Channel Power Meter</a></li>
+                  <li><a href="https://www.satec-global.com/products/bfm-dfr/" target="_blank" rel="noopener noreferrer">BFM-DFR Multi-Channel Fault Recorder</a></li>
+                  <li><a href="https://www.satec-global.com/products/pro-series-power-meter/" target="_blank" rel="noopener noreferrer">PRO Series NextGen Analyzer (EM235, PM335)</a></li>
                   <li><a href="https://www.satec-global.com/products/17x_pro/" target="_blank" rel="noopener noreferrer">PM17x PRO NextGen Analyzer</a></li>
                   <li><a href="https://www.satec-global.com/products/pm180/" target="_blank" rel="noopener noreferrer">PM180 All-in-One PQ Analyzer</a></li>
                   <li><a href="https://www.satec-global.com/products/pmu-pro/" target="_blank" rel="noopener noreferrer">PMU PRO Phasor Measurement Unit</a></li>
