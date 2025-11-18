@@ -8,6 +8,19 @@ export type NewsItem = {
   date: string; // YYYY-MM-DD
   url?: string;
   imageUrl?: string;
+  // New professional fields
+  category?: string; // Kategori artikel (Berita, Event, Tutorial, dll)
+  tags?: string[]; // Array of tags
+  author?: string; // Nama penulis
+  authorEmail?: string; // Email penulis
+  status?: 'draft' | 'published' | 'archived'; // Status publikasi
+  slug?: string; // URL-friendly slug
+  metaDescription?: string; // SEO meta description
+  metaKeywords?: string; // SEO keywords
+  featured?: boolean; // Artikel unggulan
+  viewCount?: number; // Jumlah views
+  publishedAt?: string; // Tanggal publikasi
+  updatedAt?: string; // Tanggal update terakhir
 };
 
 export type NewsInput = {
@@ -17,6 +30,16 @@ export type NewsInput = {
   date?: string;
   url?: string;
   imageUrl?: string;
+  // New professional fields
+  category?: string;
+  tags?: string[];
+  author?: string;
+  authorEmail?: string;
+  status?: 'draft' | 'published' | 'archived';
+  slug?: string;
+  metaDescription?: string;
+  metaKeywords?: string;
+  featured?: boolean;
 };
 
 type NewsRow = {
@@ -27,12 +50,24 @@ type NewsRow = {
   date: string;
   url: string | null;
   image_url: string | null;
+  category: string | null;
+  tags: string[] | null;
+  author: string | null;
+  author_email: string | null;
+  status: string | null;
+  slug: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
+  featured: boolean | null;
+  view_count: number | null;
+  published_at: string | null;
+  updated_at: string | null;
 };
 
 export async function getAllNews(): Promise<NewsItem[]> {
   const { data, error } = await supabase
     .from("news")
-    .select("id, title, summary, content, date, url, image_url")
+    .select("*")
     .order("date", { ascending: false });
 
   if (error) {
@@ -48,6 +83,18 @@ export async function getAllNews(): Promise<NewsItem[]> {
     date: row.date,
     url: row.url ?? undefined,
     imageUrl: row.image_url ?? undefined,
+    category: row.category ?? undefined,
+    tags: row.tags ?? undefined,
+    author: row.author ?? undefined,
+    authorEmail: row.author_email ?? undefined,
+    status: (row.status as 'draft' | 'published' | 'archived') ?? 'published',
+    slug: row.slug ?? undefined,
+    metaDescription: row.meta_description ?? undefined,
+    metaKeywords: row.meta_keywords ?? undefined,
+    featured: row.featured ?? false,
+    viewCount: row.view_count ?? 0,
+    publishedAt: row.published_at ?? undefined,
+    updatedAt: row.updated_at ?? undefined,
   }));
 }
 
@@ -56,7 +103,7 @@ export async function getNewsById(id: string): Promise<NewsItem | null> {
 
   const { data, error } = await supabase
     .from("news")
-    .select("id, title, summary, content, date, url, image_url")
+    .select("*")
     .eq("id", id)
     .maybeSingle();
 
@@ -67,14 +114,27 @@ export async function getNewsById(id: string): Promise<NewsItem | null> {
 
   if (!data) return null;
 
+  const row = data as NewsRow;
   return {
-    id: data.id,
-    title: data.title,
-    summary: data.summary,
-    content: data.content ?? undefined,
-    date: data.date,
-    url: data.url ?? undefined,
-    imageUrl: data.image_url ?? undefined,
+    id: row.id,
+    title: row.title,
+    summary: row.summary,
+    content: row.content ?? undefined,
+    date: row.date,
+    url: row.url ?? undefined,
+    imageUrl: row.image_url ?? undefined,
+    category: row.category ?? undefined,
+    tags: row.tags ?? undefined,
+    author: row.author ?? undefined,
+    authorEmail: row.author_email ?? undefined,
+    status: (row.status as 'draft' | 'published' | 'archived') ?? 'published',
+    slug: row.slug ?? undefined,
+    metaDescription: row.meta_description ?? undefined,
+    metaKeywords: row.meta_keywords ?? undefined,
+    featured: row.featured ?? false,
+    viewCount: row.view_count ?? 0,
+    publishedAt: row.published_at ?? undefined,
+    updatedAt: row.updated_at ?? undefined,
   };
 }
 
@@ -88,6 +148,11 @@ export async function updateNews(id: string, input: NewsInput): Promise<NewsItem
 
   const now = new Date();
   const date = input.date && input.date.trim() !== "" ? input.date : now.toISOString().slice(0, 10);
+  
+  // Generate slug from title if not provided
+  const slug = input.slug || input.title.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 
   const { data, error } = await supabase
     .from("news")
@@ -98,9 +163,19 @@ export async function updateNews(id: string, input: NewsInput): Promise<NewsItem
       date,
       url: input.url ?? null,
       image_url: input.imageUrl ?? null,
+      category: input.category ?? null,
+      tags: input.tags ?? null,
+      author: input.author ?? null,
+      author_email: input.authorEmail ?? null,
+      status: input.status ?? 'published',
+      slug,
+      meta_description: input.metaDescription ?? null,
+      meta_keywords: input.metaKeywords ?? null,
+      featured: input.featured ?? false,
+      updated_at: now.toISOString(),
     })
     .eq("id", id)
-    .select("id, title, summary, content, date, url, image_url")
+    .select("*")
     .single();
 
   if (error) {
@@ -108,14 +183,27 @@ export async function updateNews(id: string, input: NewsInput): Promise<NewsItem
     throw new Error("Gagal mengupdate berita");
   }
 
+  const row = data as NewsRow;
   return {
-    id: data.id,
-    title: data.title,
-    summary: data.summary,
-    content: data.content ?? undefined,
-    date: data.date,
-    url: data.url ?? undefined,
-    imageUrl: data.image_url ?? undefined,
+    id: row.id,
+    title: row.title,
+    summary: row.summary,
+    content: row.content ?? undefined,
+    date: row.date,
+    url: row.url ?? undefined,
+    imageUrl: row.image_url ?? undefined,
+    category: row.category ?? undefined,
+    tags: row.tags ?? undefined,
+    author: row.author ?? undefined,
+    authorEmail: row.author_email ?? undefined,
+    status: (row.status as 'draft' | 'published' | 'archived') ?? 'published',
+    slug: row.slug ?? undefined,
+    metaDescription: row.meta_description ?? undefined,
+    metaKeywords: row.meta_keywords ?? undefined,
+    featured: row.featured ?? false,
+    viewCount: row.view_count ?? 0,
+    publishedAt: row.published_at ?? undefined,
+    updatedAt: row.updated_at ?? undefined,
   };
 }
 
@@ -142,6 +230,14 @@ export async function addNews(input: NewsInput): Promise<NewsItem> {
 
   const now = new Date();
   const date = input.date && input.date.trim() !== "" ? input.date : now.toISOString().slice(0, 10);
+  
+  // Generate slug from title if not provided
+  const slug = input.slug || input.title.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  
+  const status = input.status ?? 'published';
+  const publishedAt = status === 'published' ? now.toISOString() : null;
 
   const { data, error } = await supabase
     .from("news")
@@ -152,8 +248,20 @@ export async function addNews(input: NewsInput): Promise<NewsItem> {
       date,
       url: input.url ?? null,
       image_url: input.imageUrl ?? null,
+      category: input.category ?? null,
+      tags: input.tags ?? null,
+      author: input.author ?? null,
+      author_email: input.authorEmail ?? null,
+      status,
+      slug,
+      meta_description: input.metaDescription ?? null,
+      meta_keywords: input.metaKeywords ?? null,
+      featured: input.featured ?? false,
+      view_count: 0,
+      published_at: publishedAt,
+      updated_at: now.toISOString(),
     })
-    .select("id, title, summary, content, date, url, image_url")
+    .select("*")
     .single();
 
   if (error) {
@@ -161,13 +269,26 @@ export async function addNews(input: NewsInput): Promise<NewsItem> {
     throw new Error("Gagal menyimpan berita");
   }
 
+  const row = data as NewsRow;
   return {
-    id: data.id,
-    title: data.title,
-    summary: data.summary,
-    content: data.content ?? undefined,
-    date: data.date,
-    url: data.url ?? undefined,
-    imageUrl: data.image_url ?? undefined,
+    id: row.id,
+    title: row.title,
+    summary: row.summary,
+    content: row.content ?? undefined,
+    date: row.date,
+    url: row.url ?? undefined,
+    imageUrl: row.image_url ?? undefined,
+    category: row.category ?? undefined,
+    tags: row.tags ?? undefined,
+    author: row.author ?? undefined,
+    authorEmail: row.author_email ?? undefined,
+    status: (row.status as 'draft' | 'published' | 'archived') ?? 'published',
+    slug: row.slug ?? undefined,
+    metaDescription: row.meta_description ?? undefined,
+    metaKeywords: row.meta_keywords ?? undefined,
+    featured: row.featured ?? false,
+    viewCount: row.view_count ?? 0,
+    publishedAt: row.published_at ?? undefined,
+    updatedAt: row.updated_at ?? undefined,
   };
 }
