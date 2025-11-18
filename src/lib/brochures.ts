@@ -46,6 +46,10 @@ const BROCHURE_GROUPS: BrochureGroup[] = [
         href: "/brosur/SERTEC/CMCE-MARINE-Datasheet.pdf",
       },
       {
+        name: "CMCE NICE Datasheet",
+        href: "/brosur/SERTEC/NICE-Datasheet.pdf",
+      },
+      {
         name: "CMCE Manual (ENG)",
         href: "/brosur/SERTEC/MANUAL-CMCE-SERTEC-2021 - ENG_2.pdf",
       },
