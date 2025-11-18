@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 const PASSWORD = "baswaranewss";
 const STORAGE_KEY = "adminNewsAuth";
@@ -71,7 +70,6 @@ export default function AdminLoginPage() {
           </form>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

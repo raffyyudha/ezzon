@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/images/logo.png";
-import isoLogo from "@/iso.png";
 import { getAllNews, type NewsItem } from "@/lib/newsStore";
 
 function formatDate(value: string) {
@@ -21,11 +20,11 @@ function formatDate(value: string) {
 export default async function Footer() {
   const year = new Date().getFullYear();
   
-  // Fetch 2 artikel terbaru
+  // Fetch 3 artikel terbaru
   let recentPosts: NewsItem[] = [];
   try {
     const allNews = await getAllNews();
-    recentPosts = allNews.slice(0, 2);
+    recentPosts = allNews.slice(0, 3);
   } catch (error) {
     console.error("Failed to load recent posts:", error);
   }
@@ -70,7 +69,7 @@ export default async function Footer() {
 
             <div className="mt-6 inline-flex items-center justify-center">
               <Image
-                src={isoLogo}
+                src="/isologo.png"
                 alt="ISO 9001:2015"
                 width={120}
                 height={120}
@@ -84,7 +83,7 @@ export default async function Footer() {
             <h3 className="text-sm font-bold tracking-widest text-gray-900 mb-6">
               TAUTAN CEPAT
             </h3>
-            <ul className="space-y-3 text-sm text-gray-700">
+            <ul className="space-y-3 md:space-y-8 text-sm md:text-base text-gray-700">
               <li>
                 <Link href="/products" className="hover:text-primary transition-colors">
                   Produk

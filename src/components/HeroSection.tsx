@@ -52,7 +52,12 @@ export default function HeroSection() {
 
   return (
     <>
-    <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
+    <section
+      className="relative w-full h-screen min-h-[600px] overflow-hidden bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/bghitam.jpg')",
+      }}
+    >
       {slides.map((slide, index) => (
         <div
           key={slide.id}
@@ -60,18 +65,14 @@ export default function HeroSection() {
             index === safeCurrentSlide ? "opacity-100" : "opacity-0"
           }`}
         >
-          {/* Mobile background */}
+          {/* Mobile background - always show full image */}
           <div
-            className="absolute inset-0 bg-no-repeat md:hidden"
-            style={{
-              backgroundImage: `url('${slide.imageMobile}')`,
-              backgroundSize: "100% 100%",
-              backgroundPosition: "center",
-            }}
+            className="absolute inset-0 bg-contain bg-center bg-no-repeat md:hidden"
+            style={{ backgroundImage: `url('${slide.imageMobile}')` }}
           />
-          {/* Desktop background */}
+          {/* Desktop background - always show full image */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat hidden md:block"
+            className="absolute inset-0 bg-contain bg-center bg-no-repeat hidden md:block"
             style={{ backgroundImage: `url('${slide.imageDesktop}')` }}
           />
           

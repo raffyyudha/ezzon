@@ -1,10 +1,10 @@
 import Link from "next/link";
-import expertLogo from "@/file baru/expertlogo.png";
-import expertProduct from "@/file baru/expertpowerproduk.png";
-import satecLogo from "@/file baru/satecckckckc.png";
-import satecProduct from "@/file baru/satec.png";
-import sertecLogo from "@/file baru/sertec logo.png";
-import sertecProduct from "@/file baru/sertec produk.png";
+import expertLogo from "@/filebaru/expertlogo.png";
+import expertProduct from "@/filebaru/expertpowerprodukganteng.png";
+import satecLogo from "@/filebaru/satecckckckc.png";
+import satecProduct from "@/filebaru/satec.png";
+import sertecLogo from "@/filebaru/sertecfafae.png";
+import sertecProduct from "@/filebaru/sertecprodukt.png";
 
 const services = [
   {
@@ -58,13 +58,13 @@ export default function ServicesSection() {
       {services.map((service) => (
         <section
           key={service.id}
-          className="py-16 bg-cover bg-center"
+          className="py-12 md:py-16 bg-cover bg-center"
           style={{
             backgroundImage: "url('/bghitam.jpg')",
           }}
         >
           <div className="container">
-            <div className="max-w-5xl mx-auto grid grid-cols-2 gap-6 md:gap-10 lg:gap-12 items-center">
+            <div className="max-w-5xl mx-auto grid grid-cols-[1.1fr,1.4fr] md:grid-cols-2 gap-4 md:gap-10 lg:gap-12 items-center">
               {/* Kolom Kiri: Teks & Deskripsi */}
               <div
                 className={`${service.reverse ? "order-2" : "order-1"}`}
@@ -81,7 +81,7 @@ export default function ServicesSection() {
                   </div>
                 )}
                 {service.id === 3 && service.logo && (
-                  <div className="mt-8 md:mt-12 mb-0">
+                  <div className="mt-10 md:mt-14 mb-2 md:mb-3">
                     <img
                       src={service.logo}
                       alt={service.title}
@@ -91,12 +91,12 @@ export default function ServicesSection() {
                   </div>
                 )}
                 {service.id === 1 && service.logo && (
-                  <div className="mb-3 md:mb-4">
+                  <div className="mb-4 md:mb-6">
                     <img
                       src={service.logo}
                       alt={service.title}
                       loading="lazy"
-                      className="h-14 md:h-20 object-contain"
+                      className="h-16 sm:h-20 md:h-24 lg:h-28 object-contain"
                     />
                   </div>
                 )}
@@ -106,12 +106,12 @@ export default function ServicesSection() {
                   </h2>
                 )}
 
-                <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-100 mb-3 md:mb-6 leading-relaxed">
+                <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-100 mb-2 md:mb-6 leading-relaxed">
                   {service.description}
                 </p>
 
                 {/* Bullet points */}
-                <div className="space-y-1 md:space-y-3 mb-4 md:mb-8">
+                <div className="space-y-1 md:space-y-3 mb-3 md:mb-8">
                   {service.bullets.map((bullet: string, idx: number) => (
                     <div
                       key={idx}
@@ -148,8 +148,10 @@ export default function ServicesSection() {
                   loading="lazy"
                   className={
                     service.id === 1
-                      ? "w-full max-w-[280px] md:max-w-lg object-contain"
-                      : "w-full max-w-[230px] md:max-w-md lg:max-w-lg object-contain"
+                      ? "w-full max-w-full md:max-w-[720px] lg:max-w-[840px] object-contain" 
+                      : service.id === 3
+                        ? "w-full max-w-full md:max-w-[640px] lg:max-w-[720px] object-contain"
+                        : "w-full max-w-full md:max-w-md lg:max-w-lg object-contain"
                   }
                 />
               </div>
