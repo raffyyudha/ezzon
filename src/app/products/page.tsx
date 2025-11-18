@@ -5,7 +5,7 @@ import Link from "next/link";
 import { products } from "@/data/products";
 
 export default function ProductsIndex() {
-  // Custom sections order: SATEC hardware → ExpertPower (EMS) → SERTEC Marine
+  // Custom sections order: SATEC hardware → ExpertPower (EMS) → SERTEC → SERTEC Marine
   const sections = [
     {
       title: "SATEC",
@@ -17,6 +17,10 @@ export default function ProductsIndex() {
     },
     {
       title: "SERTEC",
+      items: products.filter((p) => p.brand === "SERTEC"),
+    },
+    {
+      title: "SERTEC MARINE",
       items: products.filter((p) => p.brand === "SERTEC Marine"),
     },
   ];
@@ -26,26 +30,14 @@ export default function ProductsIndex() {
       <Header />
       <main>
         <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
-          {/* Mobile background: full banner 1.png */}
+          {/* Header background image for all screen sizes */}
           <div
-            className="absolute inset-0 bg-cover bg-center md:hidden"
-            style={{ backgroundImage: "url('/1.webp')" }}
-          />
-          {/* Desktop background: black background image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center hidden md:block"
-            style={{ backgroundImage: "url('/bghitam.webp')" }}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/headerproduk.webp')" }}
           />
           <div className="container relative flex items-center justify-center">
             {/* Spacer for hero height */}
             <div className="h-40 sm:h-56 md:h-72 lg:h-80" />
-            {/* Desktop overlay image */}
-            <img
-              src="/desktop.webp"
-              alt="Produk"
-              loading="lazy"
-              className="hidden md:block absolute max-w-4xl w-full h-auto object-contain"
-            />
           </div>
         </section>
 
