@@ -88,7 +88,7 @@ export default async function ContactPage() {
                         href="https://wa.me/628174147477"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-[#1A7B4C] hover:text-[#166A42] transition-colors text-lg font-medium block"
+                        className="text-white hover:text-gray-300 transition-colors text-lg font-medium block"
                       >
                         +62 817 4147 477
                       </a>
