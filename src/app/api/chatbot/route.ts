@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 // Pastikan dijalankan di lingkungan Node.js
 export const runtime = "nodejs";
@@ -10,6 +12,17 @@ const OPENROUTER_MODEL_ID = process.env.OPENROUTER_MODEL_ID ?? "openai/gpt-4o";
 if (process.env.NODE_ENV === 'development') {
   console.log('OPENROUTER_API_KEY exists:', !!OPENROUTER_API_KEY);
   console.log('OPENROUTER_API_KEY length:', OPENROUTER_API_KEY?.length || 0);
+}
+
+// Load knowledge base
+let knowledgeBase = "";
+try {
+  const knowledgeBasePath = path.join(process.cwd(), "ai-knowledge-base.md");
+  knowledgeBase = fs.readFileSync(knowledgeBasePath, "utf-8");
+  console.log("✅ Knowledge base loaded successfully");
+} catch (error) {
+  console.error("⚠️ Failed to load knowledge base:", error);
+  knowledgeBase = "Knowledge base tidak tersedia. Gunakan informasi umum.";
 }
 
 export async function POST(request: Request) {
@@ -35,7 +48,32 @@ export async function POST(request: Request) {
       {
         role: "system" as const,
         content:
-          "Kamu adalah Baswara AI, asisten layanan pelanggan yang ramah untuk PT. Anugerah Baswara Megah (ABM). Jawab selalu dalam bahasa Indonesia yang sopan dan mudah dipahami. Berikan jawaban singkat dan to the point, tapi jelas. Fokus pada informasi yang relevan dengan produk, solusi energi, proteksi petir SERTEC, dan layanan perusahaan yang ada di website. Jika kamu tidak yakin atau informasi tidak tersedia, sarankan pengguna untuk menghubungi tim sales melalui WhatsApp 08174147477 atau email sales@baswarasolution.com.",
+          `Kamu adalah Baswara AI, asisten layanan pelanggan yang ramah dan profesional untuk PT. Anugerah Baswara Megah (ABM). Jawab selalu dalam bahasa Indonesia yang sopan, mudah dipahami, dan akurat. Berikan jawaban yang informatif namun tetap to the point.
+
+INFORMASI PENTING PERUSAHAAN:
+- Kantor Pusat: Paccerakang Raya No. 150A, Biringkanaya, Makassar 90241, Sulawesi Selatan
+- Kantor Cabang: Jl. Gajah Mada No.27A, RT.5/RW.7, Krukut, Taman Sari, Jakarta Barat 11140
+- Telepon/WhatsApp: +62 817 4147 477
+- Email: sales@baswarasolution.com
+- Jam Operasional: Senin-Jumat 9:00-18:00, Sabtu 9:00-16:00, Minggu dengan janji temu
+
+CARA KERJA SERTEC CMCE (PENTING - JAWAB DENGAN BENAR):
+SERTEC CMCE bekerja dengan cara mengkompensasi ion positif dan negatif di atmosfer atau de-Ionisasi sistem. Sistem ini dirancang untuk mendeteksi dan menangkap petir sebelum mencapai struktur yang dilindungi. Dengan teknologi yang canggih, SERTEC memastikan proteksi maksimal dan mengurangi risiko kerusakan akibat petir.
+
+KNOWLEDGE BASE PRODUK:
+Gunakan informasi lengkap di bawah ini untuk menjawab pertanyaan tentang produk, spesifikasi, dan rekomendasi:
+
+${knowledgeBase}
+
+PANDUAN MENJAWAB:
+1. Gunakan knowledge base untuk memberikan informasi detail dan akurat tentang produk
+2. Sebutkan model/tipe produk yang spesifik jika ditanya rekomendasi
+3. Jelaskan fitur dan keunggulan produk dengan jelas
+4. Bandingkan produk jika customer meminta
+5. Berikan rekomendasi berdasarkan kebutuhan customer (industri, aplikasi, budget)
+6. Jika informasi tidak ada di knowledge base, sarankan customer menghubungi sales untuk konsultasi detail
+
+Fokus pada memberikan value dan membantu customer menemukan solusi terbaik. Jika ada pertanyaan teknis mendalam atau butuh quotation, arahkan ke tim sales melalui WhatsApp 08174147477 atau email sales@baswarasolution.com.`,
       },
       ...history,
     ];
@@ -51,7 +89,8 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         model: OPENROUTER_MODEL_ID,
         messages,
-        temperature: 0.4,
+        temperature: 0.3, // Lower for more accurate knowledge-based responses
+        max_tokens: 1000, // Enough for detailed product explanations
       }),
     });
 
