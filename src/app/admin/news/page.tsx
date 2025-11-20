@@ -3,7 +3,7 @@
 import { useEffect, useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import RichTextEditor from "@/components/RichTextEditor";
+import ModernRichTextEditor from "@/components/ModernRichTextEditor";
 import type { NewsItem } from "@/lib/newsStore";
 
 const STORAGE_KEY = "adminNewsAuth";
@@ -648,7 +648,7 @@ export default function AdminNewsPage() {
                 </h3>
                 
                 <div>
-                  <RichTextEditor
+                  <ModernRichTextEditor
                     value={content}
                     onChange={setContent}
                     placeholder="Tulis artikel lengkap dengan format profesional di sini. Gunakan heading, bold, italic, list, link, gambar, dan elemen lainnya untuk membuat artikel yang menarik dan mudah dibaca..."
