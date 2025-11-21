@@ -79,7 +79,25 @@
 
   /* Article Content Styles */
   .article-content {
-    @apply text-gray-800 leading-relaxed;
+    @apply text-gray-800;
+    line-height: 1.8;
+    white-space: pre-wrap; /* Preserve line breaks from plain text */
+  }
+
+  /* Add spacing between all direct children */
+  .article-content > * {
+    margin-bottom: 1rem;
+  }
+
+  .article-content > *:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Handle line breaks - make double line breaks create paragraph spacing */
+  .article-content br + br {
+    display: block;
+    content: "";
+    margin-top: 0.5rem;
   }
 
   .article-content h2 {
@@ -92,6 +110,12 @@
 
   .article-content p {
     @apply mb-4 text-gray-700;
+  }
+
+  /* Ensure spacing even for paragraphs without explicit class */
+  .article-content > p,
+  .article-content p[class*="mb-"] {
+    margin-bottom: 1rem !important;
   }
 
   .article-content strong {

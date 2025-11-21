@@ -117,8 +117,25 @@ Admin News Dashboard telah di-upgrade menjadi sistem manajemen artikel yang **SU
 4. **Tulis Konten**
    - Ringkasan singkat (max 160 karakter untuk preview)
    - Artikel lengkap dengan Rich Text Editor
-   - Gunakan heading untuk struktur
+   - **PENTING**: Setiap paragraf HARUS dibungkus dengan tag `<p>` atau gunakan tombol "P" di toolbar
+   - Gunakan heading untuk struktur (tombol H2, H3)
    - Tambahkan gambar, link, list sesuai kebutuhan
+   
+   **Contoh Format yang BENAR**:
+   ```html
+   <p class="mb-4"><strong>InrushCurrent</strong> — The Instant Shock That Shortens Equipment Life</p>
+   
+   <p class="mb-4">Segalanya tampak normal... hingga suatu pagi, sistem panel listrik tiba-tiba trip tanpa sebab yang jelas.</p>
+   
+   <p class="mb-4">Setelah dinyalakan ulang, semua kembali berjalan normal. Namun seminggu kemudian, peristiwa yang sama terulang — kali ini di sirkuit berbeda.</p>
+   ```
+   
+   **Format yang SALAH** (tanpa tag `<p>`):
+   ```html
+   <strong>InrushCurrent</strong> — The Instant Shock That Shortens Equipment Life
+   
+   Segalanya tampak normal... hingga suatu pagi...
+   ```
 
 5. **Tambahkan Tags**
    - Ketik tag dan tekan Enter

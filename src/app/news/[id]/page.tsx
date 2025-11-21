@@ -107,7 +107,7 @@ export default async function NewsDetailPage({
             {news.content && news.content.trim() !== "" ? (
               // Render full article with HTML content
               <article
-                className="prose prose-lg max-w-none text-gray-800 prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:leading-relaxed prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-img:shadow-md prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic"
+                className="article-content"
                 dangerouslySetInnerHTML={{ __html: news.content }}
               />
             ) : (

@@ -40,6 +40,56 @@ export default function ModernRichTextEditor({
     localStorage.setItem('imageLibrary', JSON.stringify(images));
   };
 
+  // Auto-format plain text to HTML with proper paragraph tags
+  const formatPlainTextToHTML = (text: string): string => {
+    // Split by double line breaks (paragraph separator)
+    const paragraphs = text.split(/\n\n+/);
+    
+    return paragraphs
+      .map(para => {
+        const trimmed = para.trim();
+        if (!trimmed) return '';
+        
+        // Check if already has HTML tags
+        if (trimmed.startsWith('<')) {
+          return trimmed;
+        }
+        
+        // Replace single line breaks with <br>
+        const withBreaks = trimmed.replace(/\n/g, '<br>');
+        
+        // Wrap in paragraph tag
+        return `<p class="mb-4">${withBreaks}</p>`;
+      })
+      .filter(Boolean)
+      .join('\n\n');
+  };
+
+  // Handle paste event
+  const handlePaste = (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const pastedText = e.clipboardData.getData('text/plain');
+    
+    // Only auto-format if pasted text doesn't contain HTML tags
+    if (pastedText && !pastedText.includes('<')) {
+      e.preventDefault();
+      
+      const formatted = formatPlainTextToHTML(pastedText);
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const newValue = value.substring(0, start) + formatted + value.substring(end);
+      
+      onChange(newValue);
+      
+      setTimeout(() => {
+        textarea.focus();
+        textarea.setSelectionRange(start + formatted.length, start + formatted.length);
+      }, 0);
+    }
+  };
+
   // Insert text at cursor position
   const insertAtCursor = (text: string) => {
     const textarea = textareaRef.current;
@@ -276,7 +326,8 @@ export default function ModernRichTextEditor({
             ref={textareaRef}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            placeholder={placeholder || "Mulai menulis artikel Anda di sini...\n\nGunakan toolbar di atas untuk format teks dan insert gambar.\n\nAnda juga bisa drag & drop gambar langsung ke sini!"}
+            onPaste={handlePaste}
+            placeholder={placeholder || "Mulai menulis artikel Anda di sini...\n\nCopy-paste teks langsung dari Word/dokumen lain - akan otomatis diformat!\n\nGunakan toolbar di atas untuk format teks dan insert gambar.\n\nAnda juga bisa drag & drop gambar langsung ke sini!"}
             className="w-full px-4 py-4 min-h-[500px] focus:outline-none font-mono text-sm leading-relaxed resize-none"
             style={{ minHeight: '500px' }}
           />
@@ -318,10 +369,11 @@ export default function ModernRichTextEditor({
           <div>
             <p className="font-semibold mb-1">Tips Menulis Artikel:</p>
             <ul className="space-y-1 text-gray-600">
+              <li>• <strong>MUDAH:</strong> Copy-paste langsung dari Word/dokumen - jarak paragraf otomatis diatur!</li>
+              <li>• Pisahkan paragraf dengan 2x Enter (baris kosong) untuk jarak yang benar</li>
               <li>• Gunakan heading (H2, H3) untuk struktur artikel yang jelas</li>
               <li>• Upload gambar dengan drag & drop atau tombol Upload</li>
               <li>• Simpan gambar ke Galeri untuk digunakan kembali di artikel lain</li>
-              <li>• Gunakan Link untuk menambahkan tautan ke datasheet atau brosur produk</li>
             </ul>
           </div>
         </div>
