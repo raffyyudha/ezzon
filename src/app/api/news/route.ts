@@ -22,6 +22,15 @@ export async function POST(request: Request) {
       date: body.date,
       url: body.url?.trim() || undefined,
       imageUrl: body.imageUrl?.trim() || undefined,
+      category: body.category?.trim() || undefined,
+      tags: body.tags || undefined,
+      author: body.author?.trim() || undefined,
+      authorEmail: body.authorEmail?.trim() || undefined,
+      status: body.status || 'published',
+      slug: body.slug?.trim() || undefined,
+      metaDescription: body.metaDescription?.trim() || undefined,
+      metaKeywords: body.metaKeywords?.trim() || undefined,
+      featured: body.featured || false,
     });
 
     return NextResponse.json(item, { status: 201 });

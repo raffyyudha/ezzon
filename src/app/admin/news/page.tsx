@@ -220,20 +220,41 @@ export default function AdminNewsPage() {
 
     try {
       setError(null);
+      console.log('Deleting news with ID:', id);
+      
       const res = await fetch(`/api/news/${id}`, { method: "DELETE" });
+      console.log('Delete response status:', res.status);
+      
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
+        console.error('Delete failed:', body);
         const message =
           typeof body === "object" && body && "message" in body && typeof body.message === "string"
             ? body.message
             : "Gagal menghapus berita";
         throw new Error(message);
       }
-      setItems((prev) => prev.filter((it) => it.id !== id));
+      
+      const responseData = await res.json();
+      console.log('Delete successful:', responseData);
+      
+      // Remove from state
+      setItems((prev) => {
+        const filtered = prev.filter((it) => it.id !== id);
+        console.log('Items before delete:', prev.length, 'after:', filtered.length);
+        return filtered;
+      });
+      
       if (editingId === id) {
         handleCancelEdit();
       }
+      
+      // Show success message
+      if (typeof window !== "undefined") {
+        alert("Berita berhasil dihapus!");
+      }
     } catch (err: unknown) {
+      console.error('Delete error:', err);
       const message = err instanceof Error ? err.message : "Gagal menghapus berita";
       setError(message);
     }

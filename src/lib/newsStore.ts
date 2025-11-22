@@ -212,15 +212,40 @@ export async function deleteNews(id: string): Promise<void> {
     throw new Error("News id is required");
   }
 
-  const { error } = await supabase
+  console.log('Attempting to delete news with ID:', id);
+
+  // First check if the news exists
+  const { data: existing, error: checkError } = await supabase
+    .from("news")
+    .select("id, title")
+    .eq("id", id)
+    .maybeSingle();
+
+  if (checkError) {
+    console.error("Error checking news existence:", checkError);
+    throw new Error("Gagal memeriksa berita");
+  }
+
+  if (!existing) {
+    console.error("News not found with ID:", id);
+    throw new Error("Berita tidak ditemukan");
+  }
+
+  console.log('Found news to delete:', existing);
+
+  // Now delete it
+  const { error, data } = await supabase
     .from("news")
     .delete()
-    .eq("id", id);
+    .eq("id", id)
+    .select();
 
   if (error) {
     console.error("Failed to delete news from Supabase", error);
-    throw new Error("Gagal menghapus berita");
+    throw new Error(`Gagal menghapus berita: ${error.message}`);
   }
+
+  console.log('Delete result:', data);
 }
 
 export async function addNews(input: NewsInput): Promise<NewsItem> {
