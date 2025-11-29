@@ -463,14 +463,28 @@ function LinkModal({
   const [url, setUrl] = useState('');
   const [text, setText] = useState('');
   const [linkType, setLinkType] = useState<'custom' | 'datasheet' | 'brochure'>('custom');
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (url && text) {
-      onInsert(url, text);
-      setUrl('');
-      setText('');
+
+    const trimmedUrl = url.trim();
+    const trimmedText = text.trim();
+
+    if (!trimmedUrl || !trimmedText) {
+      setValidationError("Teks dan URL tidak boleh kosong");
+      return;
     }
+
+    if (!/^https?:\/\/.+/i.test(trimmedUrl)) {
+      setValidationError("URL harus diawali dengan http:// atau https://");
+      return;
+    }
+
+    setValidationError(null);
+    onInsert(trimmedUrl, trimmedText);
+    setUrl('');
+    setText('');
   };
 
   return (
@@ -539,7 +553,10 @@ function LinkModal({
             <input
               type="text"
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => {
+                setText(e.target.value);
+                if (validationError) setValidationError(null);
+              }}
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder={
                 linkType === 'datasheet' 
@@ -558,9 +575,12 @@ function LinkModal({
               URL
             </label>
             <input
-              type="url"
+              type="text"
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={(e) => {
+                setUrl(e.target.value);
+                if (validationError) setValidationError(null);
+              }}
               className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="https://example.com/file.pdf"
               required
@@ -570,6 +590,11 @@ function LinkModal({
                 ? '💡 Pastikan link mengarah ke file PDF atau halaman download'
                 : '💡 Masukkan URL lengkap dengan https://'}
             </p>
+            {validationError && (
+              <p className="text-xs text-red-600 mt-1">
+                {validationError}
+              </p>
+            )}
           </div>
 
           {/* Buttons */}
