@@ -465,24 +465,30 @@ function LinkModal({
   const [linkType, setLinkType] = useState<'custom' | 'datasheet' | 'brochure'>('custom');
   const [validationError, setValidationError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const trimmedUrl = url.trim();
     const trimmedText = text.trim();
 
-    if (!trimmedUrl || !trimmedText) {
-      setValidationError("Teks dan URL tidak boleh kosong");
+    if (!trimmedUrl) {
+      const message = "URL tidak boleh kosong";
+      setValidationError(message);
+      alert(message);
       return;
     }
 
     if (!/^https?:\/\/.+/i.test(trimmedUrl)) {
-      setValidationError("URL harus diawali dengan http:// atau https://");
+      const message = "URL harus diawali dengan http:// atau https://";
+      setValidationError(message);
+      alert(message);
       return;
     }
 
+    const finalText = trimmedText || trimmedUrl;
+
     setValidationError(null);
-    onInsert(trimmedUrl, trimmedText);
+    onInsert(trimmedUrl, finalText);
     setUrl('');
     setText('');
   };
@@ -502,7 +508,7 @@ function LinkModal({
           </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <div className="p-6 space-y-4">
           {/* Link Type */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -607,13 +613,14 @@ function LinkModal({
               Batal
             </button>
             <button
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               className="flex-1 px-4 py-2.5 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-all"
             >
               Insert Link
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
