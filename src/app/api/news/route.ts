@@ -31,6 +31,7 @@ export async function POST(request: Request) {
       metaDescription: body.metaDescription?.trim() || undefined,
       metaKeywords: body.metaKeywords?.trim() || undefined,
       featured: body.featured || false,
+      scheduledDate: body.scheduledDate?.trim() || undefined,
     });
 
     return NextResponse.json(item, { status: 201 });

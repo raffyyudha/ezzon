@@ -71,6 +71,42 @@ export async function getAllNews(): Promise<NewsItem[]> {
   const { data, error } = await supabase
     .from("news")
     .select("*")
+    .eq("status", "published") // Only get published articles for public pages
+    .order("date", { ascending: false });
+
+  if (error) {
+    console.error("Failed to load news from Supabase", error);
+    throw new Error("Gagal memuat data berita");
+  }
+
+  return ((data as NewsRow[] | null) ?? []).map((row) => ({
+    id: row.id,
+    title: row.title,
+    summary: row.summary,
+    content: row.content ?? undefined,
+    date: row.date,
+    url: row.url ?? undefined,
+    imageUrl: row.image_url ?? undefined,
+    category: row.category ?? undefined,
+    tags: row.tags ?? undefined,
+    author: row.author ?? undefined,
+    authorEmail: row.author_email ?? undefined,
+    status: (row.status as 'draft' | 'published' | 'archived') ?? 'published',
+    slug: row.slug ?? undefined,
+    metaDescription: row.meta_description ?? undefined,
+    metaKeywords: row.meta_keywords ?? undefined,
+    featured: row.featured ?? false,
+    viewCount: row.view_count ?? 0,
+    publishedAt: row.published_at ?? undefined,
+    updatedAt: row.updated_at ?? undefined,
+    scheduledDate: row.scheduled_date ?? undefined,
+  }));
+}
+
+export async function getAllNewsForAdmin(): Promise<NewsItem[]> {
+  const { data, error } = await supabase
+    .from("news")
+    .select("*")
     .order("date", { ascending: false });
 
   if (error) {

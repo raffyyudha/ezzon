@@ -77,7 +77,7 @@ export default function AdminNewsPage() {
     const load = async () => {
       try {
         setLoading(true);
-        const res = await fetch("/api/news");
+        const res = await fetch("/api/news/admin"); // Use admin endpoint to get all articles
         if (!res.ok) throw new Error("Gagal memuat data berita");
         const data = (await res.json()) as NewsItem[];
         setItems(data);
@@ -973,7 +973,7 @@ export default function AdminNewsPage() {
                       {/* Content */}
                       <div className="flex-1 min-w-0">
                         {/* Status & Category Badges */}
-                        <div className="flex items-center gap-2 mb-2">
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
                           <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold ${
                             item.status === 'published' ? 'bg-green-100 text-green-800' :
                             item.status === 'draft' ? 'bg-yellow-100 text-yellow-800' :
@@ -983,6 +983,14 @@ export default function AdminNewsPage() {
                              item.status === 'draft' ? '📝 Draft' :
                              '📦 Archived'}
                           </span>
+                          {item.scheduledDate && item.status === 'draft' && (
+                            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-purple-100 text-purple-800">
+                              🕐 Terjadwal: {new Date(item.scheduledDate).toLocaleString('id-ID', { 
+                                dateStyle: 'short', 
+                                timeStyle: 'short' 
+                              })}
+                            </span>
+                          )}
                           {item.featured && (
                             <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-blue-100 text-blue-800">
                               ⭐ Featured

@@ -55,6 +55,7 @@ export async function PUT(request: Request) {
       metaDescription: body.metaDescription?.trim() || undefined,
       metaKeywords: body.metaKeywords?.trim() || undefined,
       featured: body.featured !== undefined ? body.featured : undefined,
+      scheduledDate: body.scheduledDate?.trim() || undefined,
     });
 
     return NextResponse.json(item);
