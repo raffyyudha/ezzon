@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import ChatWidget from "@/components/ChatWidget";
+import ScheduledPostsPublisher from "@/components/ScheduledPostsPublisher";
 
 export default function ClientBody({
   children,
@@ -18,6 +19,7 @@ export default function ClientBody({
     <div className="antialiased">
       {children}
       <ChatWidget />
+      <ScheduledPostsPublisher />
     </div>
   );
 }

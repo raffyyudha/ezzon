@@ -263,18 +263,52 @@ Dashboard fully responsive untuk:
 - Auto-redirect jika tidak authorized
 - Secure file upload ke Supabase Storage
 
+## 📅 Scheduled Publishing (NEW!)
+
+Fitur penjadwalan posting memungkinkan artikel dipublikasikan otomatis pada waktu tertentu.
+
+### Cara Menggunakan
+
+1. **Jadwalkan Artikel Baru**
+   - Isi form artikel seperti biasa
+   - Scroll ke bagian "🕐 Jadwalkan Publikasi"
+   - Pilih tanggal dan waktu publikasi
+   - Klik "Simpan Berita"
+   - Artikel akan tersimpan sebagai draft hingga waktu terjadwal
+
+2. **Cara Kerja**
+   - Sistem mengecek setiap 5 menit untuk artikel terjadwal
+   - Artikel otomatis berubah status menjadi published saat waktu tiba
+   - Tidak perlu intervensi manual
+
+3. **Contoh Use Case**
+   - Jadwalkan artikel event untuk H-7
+   - Publikasi otomatis saat product launch
+   - Content calendar bulanan
+   - Artikel musiman (tahun baru, hari raya, dll)
+
+4. **Tips**
+   - Jadwalkan minimal 10 menit ke depan
+   - Pastikan konten sudah final sebelum dijadwalkan
+   - Preview akan menampilkan waktu publikasi
+   - Artikel terjadwal tidak muncul di halaman publik hingga dipublikasikan
+
+**Dokumentasi lengkap**: Lihat `SCHEDULED-POSTS-GUIDE.md`
+
 ## 🎯 Future Enhancements (Possible)
 
 - [ ] Bulk actions (delete, archive multiple)
 - [ ] Export articles (CSV, JSON)
 - [ ] Duplicate article
 - [ ] Version history
-- [ ] Scheduled publishing
+- [x] Scheduled publishing ✅ **DONE**
 - [ ] Analytics integration
 - [ ] Comment moderation
 - [ ] Multi-language support
 - [ ] AI-powered content suggestions
 - [ ] Image optimization auto
+- [ ] Recurring scheduled posts
+- [ ] Email notification on publish
 
 ## 📞 Support
 
@@ -286,6 +320,6 @@ Jika ada pertanyaan atau issue:
 
 ---
 
-**Version**: 2.0 Professional Edition  
-**Last Updated**: November 2025  
+**Version**: 2.1 Professional Edition (with Scheduled Publishing)  
+**Last Updated**: Desember 2025  
 **Status**: ✅ Production Ready

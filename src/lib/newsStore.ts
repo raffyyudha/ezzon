@@ -21,6 +21,7 @@ export type NewsItem = {
   viewCount?: number; // Jumlah views
   publishedAt?: string; // Tanggal publikasi
   updatedAt?: string; // Tanggal update terakhir
+  scheduledDate?: string; // Tanggal terjadwal untuk auto-publish
 };
 
 export type NewsInput = {
@@ -40,6 +41,7 @@ export type NewsInput = {
   metaDescription?: string;
   metaKeywords?: string;
   featured?: boolean;
+  scheduledDate?: string; // Tanggal terjadwal untuk auto-publish
 };
 
 type NewsRow = {
@@ -62,6 +64,7 @@ type NewsRow = {
   view_count: number | null;
   published_at: string | null;
   updated_at: string | null;
+  scheduled_date: string | null;
 };
 
 export async function getAllNews(): Promise<NewsItem[]> {
@@ -95,6 +98,7 @@ export async function getAllNews(): Promise<NewsItem[]> {
     viewCount: row.view_count ?? 0,
     publishedAt: row.published_at ?? undefined,
     updatedAt: row.updated_at ?? undefined,
+    scheduledDate: row.scheduled_date ?? undefined,
   }));
 }
 
@@ -135,6 +139,7 @@ export async function getNewsById(id: string): Promise<NewsItem | null> {
     viewCount: row.view_count ?? 0,
     publishedAt: row.published_at ?? undefined,
     updatedAt: row.updated_at ?? undefined,
+    scheduledDate: row.scheduled_date ?? undefined,
   };
 }
 
@@ -172,6 +177,7 @@ export async function updateNews(id: string, input: NewsInput): Promise<NewsItem
       meta_description: input.metaDescription ?? null,
       meta_keywords: input.metaKeywords ?? null,
       featured: input.featured ?? false,
+      scheduled_date: input.scheduledDate ?? null,
       updated_at: now.toISOString(),
     })
     .eq("id", id)
@@ -204,6 +210,7 @@ export async function updateNews(id: string, input: NewsInput): Promise<NewsItem
     viewCount: row.view_count ?? 0,
     publishedAt: row.published_at ?? undefined,
     updatedAt: row.updated_at ?? undefined,
+    scheduledDate: row.scheduled_date ?? undefined,
   };
 }
 
@@ -284,6 +291,7 @@ export async function addNews(input: NewsInput): Promise<NewsItem> {
       featured: input.featured ?? false,
       view_count: 0,
       published_at: publishedAt,
+      scheduled_date: input.scheduledDate ?? null,
       updated_at: now.toISOString(),
     })
     .select("*")
@@ -315,5 +323,6 @@ export async function addNews(input: NewsInput): Promise<NewsItem> {
     viewCount: row.view_count ?? 0,
     publishedAt: row.published_at ?? undefined,
     updatedAt: row.updated_at ?? undefined,
+    scheduledDate: row.scheduled_date ?? undefined,
   };
 }

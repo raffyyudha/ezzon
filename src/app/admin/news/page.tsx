@@ -49,6 +49,7 @@ export default function AdminNewsPage() {
   const [metaDescription, setMetaDescription] = useState("");
   const [metaKeywords, setMetaKeywords] = useState("");
   const [featured, setFeatured] = useState(false);
+  const [scheduledDate, setScheduledDate] = useState("");
   
   const [editingId, setEditingId] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -171,6 +172,7 @@ export default function AdminNewsPage() {
     setMetaDescription(item.metaDescription || "");
     setMetaKeywords(item.metaKeywords || "");
     setFeatured(item.featured || false);
+    setScheduledDate(item.scheduledDate || "");
     setError(null);
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -198,6 +200,7 @@ export default function AdminNewsPage() {
     setMetaDescription("");
     setMetaKeywords("");
     setFeatured(false);
+    setScheduledDate("");
     setError(null);
   };
 
@@ -296,6 +299,18 @@ export default function AdminNewsPage() {
 
       const finalCategory = category === 'Lainnya' ? customCategory : category;
 
+      // Determine final status based on scheduled date
+      let finalStatus = status;
+      if (scheduledDate && scheduledDate.trim() !== "") {
+        const scheduledDateTime = new Date(scheduledDate);
+        const now = new Date();
+        
+        // If scheduled date is in the future, set status to 'scheduled'
+        if (scheduledDateTime > now) {
+          finalStatus = 'draft'; // We'll use draft status with scheduledDate set
+        }
+      }
+
       const payload = {
         title,
         summary,
@@ -307,11 +322,12 @@ export default function AdminNewsPage() {
         tags: tags.length > 0 ? tags : undefined,
         author: author || undefined,
         authorEmail: authorEmail || undefined,
-        status,
+        status: finalStatus,
         slug: slug || undefined,
         metaDescription: metaDescription || undefined,
         metaKeywords: metaKeywords || undefined,
         featured,
+        scheduledDate: scheduledDate && scheduledDate.trim() !== "" ? scheduledDate : undefined,
       };
 
       const res = await fetch(editingId ? `/api/news/${editingId}` : "/api/news", {
@@ -515,6 +531,31 @@ export default function AdminNewsPage() {
                         Kosongkan untuk menggunakan tanggal hari ini
                       </p>
                     </div>
+                  </div>
+
+                  {/* Scheduled Date */}
+                  <div className="p-4 bg-purple-50 border border-purple-200 rounded-lg">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      🕐 Jadwalkan Publikasi (Opsional)
+                    </label>
+                    <input
+                      type="datetime-local"
+                      value={scheduledDate}
+                      onChange={(e) => setScheduledDate(e.target.value)}
+                      className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                    />
+                    <p className="text-xs text-gray-600 mt-2">
+                      💡 Jika diisi, artikel akan otomatis dipublikasikan pada tanggal dan waktu yang ditentukan. 
+                      Artikel akan tersimpan sebagai draft hingga waktu terjadwal tiba.
+                    </p>
+                    {scheduledDate && (
+                      <p className="text-xs text-purple-700 mt-2 font-medium">
+                        ⏰ Akan dipublikasikan: {new Date(scheduledDate).toLocaleString('id-ID', { 
+                          dateStyle: 'full', 
+                          timeStyle: 'short' 
+                        })}
+                      </p>
+                    )}
                   </div>
 
                   {/* Featured Toggle */}
