@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     "Solusi Manajemen Energi (EMS) berbahasa Indonesia dengan penekanan pada SATEC ExpertPower sebagai produk utama, didukung perangkat SERTEC untuk monitoring dan proteksi. Integrasi WhatsApp dan AI Chatbot.",
 };
 
+export const revalidate = 0;
+
 export default function RootLayout({
   children,
 }: Readonly<{
