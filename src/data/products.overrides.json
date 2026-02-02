@@ -1,0 +1,33 @@
+{
+  "byImage": {
+    "/images/product/WhatsApp Image 2025-10-10 at 6.51.36 PM.jpeg": {
+      "shape": "Herringbone",
+      "colorFamily": "Oak"
+    },
+    "/images/product/WhatsApp Image 2025-10-10 at 7.05.46 PM.jpeg": {
+      "shape": "Stone",
+      "colorFamily": "Oak"
+    },
+    "/images/product/WhatsApp Image 2025-10-10 at 7.08.55 PM.jpeg": {
+      "shape": "Stone",
+      "colorFamily": "Oak"
+    },
+    "/images/product/WhatsApp Image 2025-10-10 at 7.09.49 PM.jpeg": {
+      "shape": "Stone",
+      "colorFamily": "Oak"
+    },
+    "/images/product/WhatsApp Image 2025-10-10 at 7.56.00 PM (1).jpeg": {
+      "shape": "Stone",
+      "colorFamily": "Oak"
+    },
+    "/images/product/WhatsApp Image 2025-10-10 at 7.59.42 PM.jpeg": {
+      "shape": "Stone",
+      "colorFamily": "Oak"
+    },
+    "/images/product/WhatsApp Image 2025-10-10 at 7.59.43 PM.jpeg": {
+      "shape": "Stone",
+      "colorFamily": "Oak"
+    }
+  },
+  "byCode": {}
+}
