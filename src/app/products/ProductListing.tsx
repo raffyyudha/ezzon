@@ -15,7 +15,7 @@ interface ProductGroup {
     slug?: string;
     thumbnail?: string;
     images?: string[];
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 interface ProductListingProps {
