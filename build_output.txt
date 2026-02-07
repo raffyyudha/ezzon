@@ -1,0 +1,43 @@
+﻿node.exe : ÔÜá `eslint` 
+configuration in 
+next.config.js is no longer 
+supported. See more info 
+here: https://nextjs.org/doc
+s/app/api-reference/cli/next
+#next-lint-options
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~
+    + CategoryInfo          
+    : NotSpecified: (ÔÜá `  
+  eslint` co...xt-lint-op   
+ tions:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+ÔÜá `images.domains` is 
+deprecated in favor of 
+`images.remotePatterns`. 
+Please update 
+next.config.js to protect 
+your application from 
+malicious users.
+ÔÜá Invalid next.config.js 
+options detected: 
+ÔÜá     Unrecognized key(s) 
+in object: 'eslint'
+ÔÜá See more info here: http
+s://nextjs.org/docs/messages
+/invalid-next-config
+Ô¿» Unable to acquire lock 
+at C:\Users\wcast\Downloads\
+ezzon-main\ezzon-main\.next\
+lock, is another instance 
+of next build running?
+  Suggestion: If you intended to restart next build, terminate the other process, and then try again.
