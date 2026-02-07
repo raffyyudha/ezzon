@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const BASE_URL = 'https://ezzon.sg';
+const BASE_URL = 'https://ezonrenovation.com';
 const MAX_URLS_PER_SITEMAP = 45000; // Google limit is 50k, we use 45k for safety
 
 // Simple data - copy from your data files
